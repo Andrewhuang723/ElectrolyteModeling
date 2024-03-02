@@ -4,34 +4,49 @@ Build model for electrolyte system in Lithium Ion Battery
 ---
 ## Semiempirical Model for Li+ conductivity of electrolytes
 
+### Database
+
 - Data source: [Chem-prop-pred](https://github.com/learningmatter-mit/Chem-prop-pred/blob/main/data/PolymerElectrolyteData.csv)[1]
 
-- Semiempirical Model for elecrolyte conductivity:
+- Queries: 
+    
+    We perform postgresql queries to request data from original database in `query.py`
+
+    ```
+    SELECT "Solvent 1 (S1)", "Salt 1", "Temperature (oC)", "Conductivity (S/cm)" FROM polymerelectrolytedata 
+    WHERE "Solvent 1 (S1)" = 'EC'
+    LIMIT 3;
+    ```
+
+    Return the value as following:
+
+    |  Solvent 1 (S1) | Salt 1          | Temperature (oC) | Conductivity (S/cm) |
+    | --------------- | --------------- | ---------------- | ------------------- |
+    | EC              | LiTFSI          | 49.93288271      | 0.000281838         |
+    | EC              | LITFSI          | 89.87674273      | 0.000432229         |
+    | EC              | LITFSI          | 0.092633174	   | 0.0000941           |
+
+
+
+### Models
+
+- Semiempirical Model for elecrolyte conductivity ($\sigma_e$):
+
+    $\sigma_e = f(m, T)$
+
+    $m$: salt concentration (mol / kg polymer or M)
+
+    $T$: temperature (K)
+
+- We implemented 3 semiempirical models for electrolyte conductivity in `semiempirical.py`:
 
     1. `Weitoa2020` [2]
     2. `LandesFiend2019` [3]
     3. `Kim2011` [4]
 
-- Structures
+### Dashboard
 
-    1. Queries: We perform postgresql queries to request data from original database in `query.py`
-
-        ```
-        SELECT "Solvent 1 (S1)", "Salt 1", "Temperature (oC)", "Conductivity (S/cm)" FROM polymerelectrolytedata 
-        WHERE "Solvent 1 (S1)" = 'EC'
-        LIMIT 3;
-        ```
-
-        Return the value as following:
-
-        |  Solvent 1 (S1) | Salt 1          | Temperature (oC) | Conductivity (S/cm) |
-        | --------------- | --------------- | ---------------- | ------------------- |
-        | EC              | LiTFSI          | 49.93288271      | 0.000281838         |
-        | EC              | LITFSI          | 89.87674273      | 0.000432229         |
-        | EC              | LITFSI          | 0.092633174	   | 0.0000941           |
-        
-
-    2. 
+- Visualization results and metrics in `semiempirical_dashboard.py`
 
 
 ---
