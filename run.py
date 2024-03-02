@@ -24,7 +24,7 @@ arg_parser.add_argument("--solvent1", default='EC', type=str, help="Input Solven
 arg_parser.add_argument("--solvent2", default='PC', type=str, help="Input Solvent 2 name", required=True)
 arg_parser.add_argument("--salt", default='LiAsF6', type=str, help="Input Salt name", required=True)
 arg_parser.add_argument("--function_name", default='Landesfeind2019', choices=['Landesfeind2019', 'Weito2020', 'Kim2020'],
-                        type=str, help="Input function name", required=True)
+                        type=str, help="Input function name")
 
 arg_parser.add_argument("--seed", default=100, type=int, help="Input seed for initial guess in curve fitting")
 arg_parser.add_argument("--test_size", default=0.2, type=float, help="Input test size ratio for train test split")

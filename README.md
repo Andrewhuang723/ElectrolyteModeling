@@ -6,7 +6,7 @@ Build model for electrolyte system in Lithium Ion Battery
 
 ### Database
 
-- Data source: [Chem-prop-pred](https://github.com/learningmatter-mit/Chem-prop-pred/blob/main/data/PolymerElectrolyteData.csv)[1]
+- Data source: [PolymerElectrolyteData](https://github.com/learningmatter-mit/Chem-prop-pred/blob/main/data/PolymerElectrolyteData.csv)[1]
 
 - Queries: 
     
@@ -43,6 +43,87 @@ Build model for electrolyte system in Lithium Ion Battery
     1. `Weitoa2020` [2]
     2. `LandesFiend2019` [3]
     3. `Kim2011` [4]
+
+
+### Run scripts
+
+#### Arguments
+
+- `solvent1`: `str` (Required)
+
+    - Define the first solvent for the electrolyte system.
+
+    - Default: `"EC"`
+
+- `solvent2`: `str` (Required)
+    
+    - Define the second solvent for the electrolyte system.
+
+    - Default: `"PC"`
+
+- `salt`: `str` (Required)
+    
+    - Define the lithium salt for the electrolyte system.
+
+    - Default: `"LiAsF6"`
+
+
+- `function_name`: `str` (Optional)
+
+    - Define the semiempircal model for the electrolyte conductivtiy model.
+
+    - Default: `"Landefiend2019"`
+
+- `seed`: `int` (Optional)
+
+    - Define the seed of the initial guess for curve fitting
+
+    - Default: `100`
+
+- `test_size`: `float` (Optional)
+
+    - Define the test size for `train_test_split` function in `scikit-learn`
+
+    - Default: `0.2`
+
+- `random_split_seed`: `int` (Optional)
+
+    - Define the seed for `train_test_split` function in `scikit-learn`.
+
+    - Default: `10`
+
+
+Example command:
+
+- `"Landesfeind2019"`
+```
+$ python3 run.py --solvent1 "EC" --solvent2 "PC" --salt "LiAsF6" --function_name "Landesfeind2019"
+```
+
+- `"Weito2020"`
+```
+$ python3 run.py --solvent1 "EC" --solvent2 "PC" --salt "LiAsF6" --function_name "Weito2020"
+```
+
+- `"Kim2011"`
+```
+$ python3 run.py --solvent1 "DMC" --solvent2 "EC" --salt "LiTDI" --function_name "Kim2011"
+```
+
+Outputs:
+
+```
+R2: 0.9700 Accuracy: 0.3684
+```
+
+Also, return the result files in `./data/semiempirical/Landesfeind2019/EC_PC_LiAsF6`
+
+```
+├── R2_plot.png
+├── parameter.csv
+└── results.csv
+```
+
 
 ### Dashboard
 

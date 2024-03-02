@@ -6,6 +6,7 @@ import configparser
 import psycopg2
 import os
 from typing import List, Tuple, Dict
+from query import system_chosen
 
 parser = configparser.ConfigParser()
 parser.read("db.ini")
@@ -137,5 +138,5 @@ def evaluate(xtest: pd.DataFrame, ytest:pd.DataFrame, curve_fit_function: callab
     error = np.abs(ypred - ytest_prepared) / ytest_prepared
     accuracy = len(np.where(error < 0.1)[0]) / len(ytest_prepared)
 
-    print(r2, accuracy)
+    print("R2: %.4f" % r2, "Accuracy: %.4f" % accuracy)
     return ypred
