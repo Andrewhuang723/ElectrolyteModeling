@@ -1,15 +1,11 @@
 import pandas as pd
 import numpy as np
+from scipy.optimize import curve_fit
+from sklearn.metrics import mean_squared_error, r2_score
 import configparser
 import psycopg2
 import os
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error, r2_score
-from scipy.optimize import differential_evolution, curve_fit
-import seaborn as sns
-import matplotlib.pyplot as plt
 from typing import List, Tuple, Dict
-
 
 parser = configparser.ConfigParser()
 parser.read("db.ini")
@@ -41,7 +37,7 @@ def conductivity_function_chosen(name: str, seed=42) -> Dict:
             "initial_guess": np.random.rand(3)
         }
     else:
-        raise Exception(f"Function {name} is not found.\n Please input 'Landesfeind2019' or Weito2020' ")
+        raise Exception(f"Function {name} is not found.\n Please input 'Landesfeind2019' or Weito2020' or 'Kim2011'")
 
 
 def parse_dataset(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
@@ -143,140 +139,3 @@ def evaluate(xtest: pd.DataFrame, ytest:pd.DataFrame, curve_fit_function: callab
 
     print(r2, accuracy)
     return ypred
-
-
-def start_plot(figsize=(10, 8), style = 'whitegrid', dpi=100):
-    fig = plt.figure(figsize=figsize, dpi=dpi)
-    gs = fig.add_gridspec(1,1)
-    plt.tight_layout()
-    with sns.axes_style(style):
-        ax = fig.add_subplot(gs[0,0])
-    return ax
-
-def R2_plot(reconstruct_y_pred, reconstruct_y_test, error, accuracy, prop_name_T, ax=None):
-    if ax is None:
-        ax = start_plot(style='darkgrid', dpi=180)
-    
-    sns.set(rc={'font.family': 'Times New Roman'})
-    ax.scatter(reconstruct_y_test.reshape(-1), reconstruct_y_pred.reshape(-1), color='darkorange', edgecolor='navy',
-               label=r'$R^2$' + ": %.4f" % r2_score(y_true=reconstruct_y_test, y_pred=reconstruct_y_pred) + '\n' +
-                     "MAPE" + ": %.4f" % error + '\n' +
-                     "Accuracy" + ": %.4f" % accuracy)
-    ymin = min(np.min(reconstruct_y_test), np.min(reconstruct_y_pred)) - 0.1
-    ymax = max(np.max(reconstruct_y_test), np.max(reconstruct_y_pred)) + 0.1
-    lim = [ymin, ymax]
-    ax.set_xlim(lim)
-    ax.set_ylim(lim)
-    ax.plot(lim, lim, c='brown', ls='--', label=r'$y=\hat y, $' + 'identity')
-    ax.legend(loc='best', frameon=True, shadow=True, fontsize=15)
-    plt.xlabel('TRUE %s' % prop_name_T, fontsize=20, font="Times New Roman")
-    plt.ylabel('PREDICTED %s' % prop_name_T, fontsize=20, font="Times New Roman")
-    plt.xticks(fontsize=20, font="Times New Roman")
-    plt.yticks(fontsize=20, font="Times New Roman")
-    plt.title('%s Testing: %d' % (prop_name_T, len(reconstruct_y_test)), fontsize=20, font="Times New Roman")
-    return ax
-
-
-if __name__ == "__main__":
-
-    ### Run combination
-    import warnings
-    from query import UPDATE_SOLVENT_NAME, SELECT_DISTINCT_S1_S2_SALT, SELECT_BINARY_SYSTEMS, SELECT_SINGLE_SYSTEMS, system_chosen
-    
-    ## Update ethylene carbonate to EC & propylene carbonate to PC
-    conn.cursor().execute(UPDATE_SOLVENT_NAME)
-    
-    ## Select distinct sets of (solvent 1, solvent 2, salt)
-    electrolyte_systems = pd.read_sql_query(SELECT_DISTINCT_S1_S2_SALT, conn).values
-
-    electrolytes_sets = set()
-    warnings.filterwarnings("ignore")
-    
-    total_results_df = None
-    counter = 0
-    
-    for electrolyte_system in electrolyte_systems:
-        ## [70, "S1-S2-Salt"]
-        s1, s2, salt = electrolyte_system[-1].split("_")
-        s1_dielectric_constant = dielectric_constant(s1)
-        s2_dielectric_constant = dielectric_constant(s2)
-        
-        ## To check if the set exists or not
-        if (s1, s2, salt) not in electrolytes_sets:
-            electrolytes_sets.add((s1, s2, salt))
-            electrolytes_sets.add((s2, s1, salt))
-        else:
-            continue
-        
-        print(f"\n{s1} || {s2} || {salt} :")
-
-        try:
-            ## chose the system where (Solvent 1 == s1 AND Solvent 2 == s2 AND Salt1 == salt)
-            #                      or (Solvent 1 == s2 AND Solvent 2 == s1 AND Salt1 == salt)
-            df = system_chosen(s1, s2, salt)
-        except Exception as e:
-            print(f"{e}")
-            continue
-        
-        # function_name = "Weito2020"
-        # function_name = "Kim2011"
-        function_name = "Landesfeind2019"
-        seed = 100
-        function_info = conductivity_function_chosen(function_name, seed=seed)
-        curve_fit_function = function_info["curve_fit_function"]
-        initial_guess = function_info["initial_guess"]
-
-        X, Y = parse_dataset(df)
-        
-        try:
-            xtrain, xtest, ytrain, ytest = train_test_split(X, Y, test_size=0.2, random_state=10)
-        except ValueError:
-            print("Not enough samples for train test split")
-            continue
-        # xtrain, xtest are tuple in the form of (solvent1, solvent2, salt, temp)
-
-        try:
-            parameter = run_fitting(xtrain, ytrain, 
-                                    curve_fit_function=curve_fit_function, 
-                                    initial_guess=initial_guess)
-        except Exception as e:
-            print(e)
-            continue
-        
-        ypred = evaluate(xtest, ytest, 
-                curve_fit_function=curve_fit_function, 
-                parameter=parameter)
-        
-        ### Save results to csv
-        results_df = xtest.copy()
-        results_df["Conductivity_test"] = ytest
-        results_df["Conductivity_pred"] = ypred
-        results_df["error"] = np.abs(ypred - ytest) / ytest
-        if not os.path.exists(f"./data/semiempirical/{function_name}/{s1}_{s2}_{salt}"):
-            os.mkdir(f"./data/semiempirical/{function_name}/{s1}_{s2}_{salt}")
-        results_df.to_csv(f"./data/semiempirical/{function_name}/{s1}_{s2}_{salt}/results.csv", index=False)
-        pd.DataFrame(parameter).to_csv(f"./data/semiempirical/{function_name}/{s1}_{s2}_{salt}/parameter.csv", index=False)
-
-        ### Plots each results
-        ax = start_plot(style="darkgrid", dpi=180)
-        R2_plot(reconstruct_y_pred=results_df["Conductivity_pred"].values, 
-                    reconstruct_y_test=results_df["Conductivity_test"].values, 
-                    error=results_df["error"].mean(),
-                    accuracy=len(results_df[results_df["error"] < 0.1]) / len(results_df),
-                    prop_name_T="Conductivity " + r"($\frac{mS}{cm}$)")
-        plt.savefig(f"./data/semiempirical/{function_name}/{s1}_{s2}_{salt}/R2_plot.png")
-    
-        if counter == 0:
-            total_results_df = results_df.copy()
-        else:
-            total_results_df = pd.concat([total_results_df, results_df], axis=0)
-        counter += 1
-
-    ### Plots total results
-    total_results_df.to_csv(f"./data/semiempirical/{function_name}/results.csv", index=False)
-    R2_plot(reconstruct_y_pred=total_results_df["Conductivity_pred"].values, 
-                reconstruct_y_test=total_results_df["Conductivity_test"].values, 
-                error=total_results_df["error"].mean(),
-                accuracy=len(total_results_df[total_results_df["error"] < 0.1]) / len(total_results_df),
-                prop_name_T="Conductivity " + r"($\frac{mS}{cm}$)")
-    plt.savefig(f"./data/semiempirical/{function_name}/R2_plot.png")
