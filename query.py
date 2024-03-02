@@ -42,40 +42,6 @@ SET "Solvent 1 (S1)" = CASE
                         END;
 """
 
-### SELECT database based on T8 with PEGDM-family polymer electrolyte
-SELECT_T8_BASED_ELECTROLYTE = """
-SELECT "index",
-        "Solvent 1 (S1)", "S1 Weight %",
-       "Solvent 2 (S2)", "S2 Weight %",
-       "Salt 1",  "Salt1 Molality (mol salt/kg polymer)",
-       "Temperature (oC)","Conductivity (S/cm)"
-FROM polymerelectrolytedata
-WHERE ("Solvent 1 (S1)" IN ('PC', 'EC', 'EMC', 'DMC')
-AND "Solvent 2 (S2)" IN ('PC',  'EC', 'EMC', 'DMC'))
-OR "Solvent 1 (S1)" LIKE 'PEGDM%'
-AND "Salt 1" IN (
-    SELECT "Salt 1"
-    FROM polymerelectrolytedata
-    GROUP BY "Salt 1"
-    HAVING COUNT("Salt 1") > 50
-);
-"""
-
-
-### Select the unique combination of (solvent 1, solvent 2, salt)
-SELECT_DISTINCT_S1_S2_SALT = """
-SELECT COUNT(t1.system), t1.system
-FROM (
-SELECT CONCAT("Solvent 1 (S1)", '_',
-       "Solvent 2 (S2)", '_',
-       "Salt 1") AS system
-FROM polymerelectrolytedata
-WHERE ("Solvent 1 (S1)" IN ('PC', 'EC', 'EMC', 'DMC')
-AND "Solvent 2 (S2)" IN ('PC',  'EC', 'EMC', 'DMC'))
-OR "Solvent 1 (S1)" LIKE 'PEGDM%') t1
-GROUP BY t1.system
-HAVING COUNT(t1.system) > 10;
-"""
 
 ### Select electrolyte system with only 1 solvent 
 SELECT_SINGLE_SYSTEMS = lambda s1, salt: f"""
@@ -108,13 +74,6 @@ OR (
     AND "Salt 1" = '{salt}' 
 );
 """
-
-
-SELECT_COLUMNS = """
-SELECT column_name
-FROM information_schema.columns
-WHERE table_schema = 'public' 
-AND table_name = 'polymerelectrolytedata';"""
 
 
 SELECT_SOLVENT = lambda solvent_name: f"""
@@ -157,25 +116,6 @@ def system_chosen(s1, s2, salt):
             df.loc[condition, "Solvent 2 (S2)"], df.loc[condition, "Solvent 1 (S1)"] = df.loc[condition, "Solvent 1 (S1)"], df.loc[condition, "Solvent 2 (S2)"]
     return df
 
-
-def get_components(component_name: str, style="solvent"):
-    with psycopg2.connect(**parser["postgres"]) as conn:
-        with conn.cursor() as cur:
-            if style == "solvent":
-                cur.execute(SELECT_SOLVENT(solvent_name=component_name))
-            elif style == "salt":
-                cur.execute(SELECT_SALT(salt_name=component_name))
-            else:
-                raise Exception("No component style found")
-            solvent_infos = cur.fetchall()
-    return solvent_infos[0]
-
-def get_index():
-    with psycopg2.connect(**parser["postgres"]) as conn:
-        with conn.cursor() as cur:
-            cur.execute("""SELECT MAX("index") FROM polymerelectrolytedata""")
-            max_idx = cur.fetchall()[0][0]
-    return max_idx + 1
 
 
 if __name__ == "__main__":
