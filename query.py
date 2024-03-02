@@ -14,8 +14,7 @@ parser.read("db.ini")
 
 ## Create connection and engine
 conn = psycopg2.connect(**parser["postgres"])
-engine = create_engine("postgresql://postgres:andrew@localhost:5432/postgres")
-
+engine = create_engine(f"postgresql://{parser['postgres']['user']}:{parser['postgres']['password']}@{parser['postgres']['dbname']}:5432/{parser['postgres']['dbname']}")
 
 cols = ['index', 'Notes', 'Compound Notebook Name', 'Date Copied to Master Database', 'Data Recorded By', 'Seshadri Group', 'Oyaizu Group', 'DOI', 
 'Solvent 1 (S1)', 'S1 SMILES', 'S1 SMILES 1', 'S1 SMILES 2', 'S1 SMILES 3', 'S1 Big SMILES', 'S1 End Group 1', 'S1 End Group 2', 'S1 Mol %', 'S1 Weight %', 'S1 SMILES 1 Mol %', 'S1 SMILES 2 Mol %', 'S1 SMILES 3 Mol %', 'S1 Molar Ratio', 'S1 Weight Ratio', 'S1 Mw', 'S1 Mn', 'S1 Mn or Mw', 'S1 Mw/Mn', 'S1 DOP', 'S1 Molar Mass (g/mol)', 'S1 Type', 'S1 Block Mol Weight', 

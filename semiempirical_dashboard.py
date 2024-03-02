@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 import configparser
 import psycopg2
 from sqlalchemy import create_engine
-from Semiemperical import *
+from semiempirical import *
 from query import system_chosen
 
 
