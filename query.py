@@ -16,6 +16,16 @@ parser.read("db.ini")
 conn = psycopg2.connect(**parser["postgres"])
 engine = create_engine(f"postgresql://{parser['postgres']['user']}:{parser['postgres']['password']}@{parser['postgres']['host']}:5432/{parser['postgres']['dbname']}")
 
+cols = ['index', 'Notes', 'Compound Notebook Name', 'Date Copied to Master Database', 'Data Recorded By', 'Seshadri Group', 'Oyaizu Group', 'DOI', 
+'Solvent 1 (S1)', 'S1 SMILES', 'S1 SMILES 1', 'S1 SMILES 2', 'S1 SMILES 3', 'S1 Big SMILES', 'S1 End Group 1', 'S1 End Group 2', 'S1 Mol %', 'S1 Weight %', 'S1 SMILES 1 Mol %', 'S1 SMILES 2 Mol %', 'S1 SMILES 3 Mol %', 'S1 Molar Ratio', 'S1 Weight Ratio', 'S1 Mw', 'S1 Mn', 'S1 Mn or Mw', 'S1 Mw/Mn', 'S1 DOP', 'S1 Molar Mass (g/mol)', 'S1 Type', 'S1 Block Mol Weight', 
+'Solvent 2 (S2)', 'S2 SMILES', 'S2 SMILES 1', 'S2 SMILES 2', 'S2 Mol %', 'S2 Weight %', 'S2 SMILES 1 Mol %', 'S2 SMILES 2 Mol %', 'S2 Molar Ratio', 'S2 Weight Ratio', 'S2 Mw', 'S2 Mn', 'S2 Mn or Mw', 'S2 Mw/Mn', 'S2 DOP', 'S2 Molar Mass (g/mol)', 'S2 Type', 
+'Solvent 3 (S3)', 'S3 SMILES', 'S3 SMILES 1', 'S3 Mol %', 'S3 Weight %', 'S3 Molar Ratio', 'S3 Weight Ratio', 'S3 Mw', 'S3 Mn', 'S3 Mn or Mw', 'S3 Mw/Mn', 'S3 DOP', 'S3 Molar Mass (g/mol)', 'S3 Type', 
+'Solvent 4 (S4)', 'S4 SMILES', 'S4 Mol %', 'S4 Weight %', 'S4 Molar Ratio', 'S4 Weight Ratio', 'S4 Mw', 'S4 Mn', 'S4 Mn or Mw', 'S4 Mw/Mn', 'S4 DOP', 'S4 Molar Mass (g/mol)', 'S4 Type', 
+'Salt 1', 'Salt1 SMILES', 'Salt1 Mol %', 'Salt1 Weight %', 'Salt1 Molality (mol salt/kg polymer)', 'Salt1 Molar Mass (g/mol)',
+'Salt 2', 'Salt2 SMILES', 'Salt2 Mol %', 'Salt2 Weight %', 'Salt2 Molality (mol salt/kg polymer)', 'Salt2 Molar Mass (g/mol)', 
+'Inorganic Material 1 (IM1)', 'IM1 Weight %', 'IM1 Particle Size (nm)', 
+'Tg (oC)', 'Heating Rate (K/min)', 'Temperature (oC)', 
+'Conductivity (S/cm)', 'log Conductivity (S/cm)']
 
 ### Update trivial solvent name to abbreviation
 UPDATE_SOLVENT_NAME = """
@@ -111,5 +121,5 @@ def system_chosen(s1, s2, salt):
 if __name__ == "__main__":
 
     ## Read original data into DB
-    # ReadOriginalData2Postgres(url="https://raw.githubusercontent.com/learningmatter-mit/Chem-prop-pred/main/data/PolymerElectrolyteData.csv",
-    #                             table_name="polymerelectrolytedata")
+    ReadOriginalData2Postgres(url="https://raw.githubusercontent.com/learningmatter-mit/Chem-prop-pred/main/data/PolymerElectrolyteData.csv",
+                                table_name="polymerelectrolytedata")
