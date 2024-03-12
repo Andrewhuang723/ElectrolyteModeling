@@ -1,6 +1,7 @@
 import dash
 from dash import Dash, html, dcc, Input, Output, callback, State
 import pandas as pd
+from sklearn.model_selection import train_test_split
 import plotly.express as px
 import plotly.figure_factory as ff
 import plotly.graph_objects as go
@@ -190,10 +191,10 @@ def process_function(n_clicks, function_name, solvent1, solvent2, salt, model_nu
 
     X, Y = parse_dataset(df)
     
-    try:
-        xtrain, xtest, ytrain, ytest = train_test_split(X, Y, test_size=0.2, random_state=10)
-    except ValueError:
-        print("Not enough samples for train test split")
+    print(len(X), len(Y))
+    xtrain, xtest, ytrain, ytest = train_test_split(X, Y, test_size=0.2, random_state=10)
+    # except ValueError:
+    #     print("Not enough samples for train test split")
         
     # xtrain, xtest are tuple in the form of (solvent1, solvent2, salt, temp)
 

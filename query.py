@@ -14,7 +14,7 @@ parser.read("db.ini")
 
 ## Create connection and engine
 conn = psycopg2.connect(**parser["postgres"])
-engine = create_engine(f"postgresql://{parser['postgres']['user']}:{parser['postgres']['password']}@{parser['postgres']['dbname']}:5432/{parser['postgres']['dbname']}")
+engine = create_engine(f"postgresql://{parser['postgres']['user']}:{parser['postgres']['password']}@{parser['postgres']['host']}:5432/{parser['postgres']['dbname']}")
 
 cols = ['index', 'Notes', 'Compound Notebook Name', 'Date Copied to Master Database', 'Data Recorded By', 'Seshadri Group', 'Oyaizu Group', 'DOI', 
 'Solvent 1 (S1)', 'S1 SMILES', 'S1 SMILES 1', 'S1 SMILES 2', 'S1 SMILES 3', 'S1 Big SMILES', 'S1 End Group 1', 'S1 End Group 2', 'S1 Mol %', 'S1 Weight %', 'S1 SMILES 1 Mol %', 'S1 SMILES 2 Mol %', 'S1 SMILES 3 Mol %', 'S1 Molar Ratio', 'S1 Weight Ratio', 'S1 Mw', 'S1 Mn', 'S1 Mn or Mw', 'S1 Mw/Mn', 'S1 DOP', 'S1 Molar Mass (g/mol)', 'S1 Type', 'S1 Block Mol Weight', 
@@ -121,10 +121,5 @@ def system_chosen(s1, s2, salt):
 if __name__ == "__main__":
 
     ## Read original data into DB
-    # ReadOriginalData2Postgres(url="https://raw.githubusercontent.com/learningmatter-mit/Chem-prop-pred/main/data/PolymerElectrolyteData.csv",
-    #                             table_name="polymerelectrolytedata")
-    PC_INFO = get_components("PC", style="solvent")
-    EC_INFO = get_components("EC", style="solvent")
-    EMC_INFO = get_components("EMC", style="solvent")
-    DMC_INFO = get_components("DMC", style="solvent")
-    LiPF6_INFO = get_components("LiPF6", style="salt")
+    ReadOriginalData2Postgres(url="https://raw.githubusercontent.com/learningmatter-mit/Chem-prop-pred/main/data/PolymerElectrolyteData.csv",
+                                table_name="polymerelectrolytedata")
