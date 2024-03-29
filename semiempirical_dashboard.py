@@ -2,6 +2,7 @@ import dash
 from dash import Dash, html, dcc, Input, Output, callback, State
 import pandas as pd
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import r2_score, mean_squared_error
 import plotly.express as px
 import plotly.figure_factory as ff
 import plotly.graph_objects as go
@@ -23,7 +24,8 @@ app.layout = html.Div(className='container',
         html.Div([
             html.H3("Functions"),
             dcc.Dropdown(
-                options=["Weito2020", "Kim2011", "Landesfeind2019"],
+                options=["Weito2020", "Kim2011", "Landesfeind2019", "Ai2020", "Ecker2015", "Capiglia1999", 
+                         "Nyman2008_arrhenius", "Prada2013", "Ramadass2004", "Valoen2005"],
                 value="Weito2020",
                 id="function-dropdown",
                 style={'width': '75%', 'color': 'black'} 
@@ -142,7 +144,7 @@ def concentration_profile_plot(salt_conc, temp, param, conductivity_pred):
     fig.add_trace(go.Scatter(x=x_steps, y=temp, mode='lines', name=f'T={temp}'))
 
     # Add scatter plot on top of the line plot
-    fig.add_trace(go.Scatter(x=x_scatter, y=conductivity_pred, mode='markers', name='Scatter Plot'))
+    fig.add_trace(go.Scatter(x=salt_conc, y=conductivity_pred, mode='markers', name='Scatter Plot'))
 
 
 @callback(

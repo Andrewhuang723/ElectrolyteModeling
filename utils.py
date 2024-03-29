@@ -35,3 +35,10 @@ def R2_plot(reconstruct_y_pred, reconstruct_y_test, error, accuracy, prop_name_T
     plt.yticks(fontsize=20, font="Times New Roman")
     plt.title('%s Testing: %d' % (prop_name_T, len(reconstruct_y_test)), fontsize=20, font="Times New Roman")
     return ax
+
+
+def melting_points(name):
+    if name == "EC":
+        return 36.4
+    elif name == "PC":
+        return -48.8

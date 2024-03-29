@@ -42,7 +42,8 @@ SELECT "index",
 FROM polymerelectrolytedata
 WHERE (
     "Solvent 1 (S1)" = '{s1}'
-    AND "Salt 1" = '{salt}');
+    AND "Salt 1" = '{salt}'
+);
 """
 
 ## Select electrolyte system with binary solvents 
@@ -56,7 +57,8 @@ FROM polymerelectrolytedata
 WHERE (
     "Solvent 1 (S1)" = '{s1}'
     AND "Solvent 2 (S2)" = '{s2}'
-    AND "Salt 1" = '{salt}') 
+    AND "Salt 1" = '{salt}'
+) 
 OR (
     "Solvent 1 (S1)" = '{s2}'
     AND "Solvent 2 (S2)" = '{s1}'
@@ -110,5 +112,21 @@ def system_chosen(s1, s2, salt):
 if __name__ == "__main__":
 
     ## Read original data into DB
-    ReadOriginalData2Postgres(url="https://raw.githubusercontent.com/learningmatter-mit/Chem-prop-pred/main/data/PolymerElectrolyteData.csv",
-                                table_name="polymerelectrolytedata")
+    # ReadOriginalData2Postgres(url="https://raw.githubusercontent.com/learningmatter-mit/Chem-prop-pred/main/data/PolymerElectrolyteData.csv",
+    #                             table_name="polymerelectrolytedata")
+
+    select = """
+    SELECT *
+    FROM (
+    SELECT CONCAT("Solvent 1 (S1)", '_',
+        "Solvent 2 (S2)", '_',
+        "Salt 1") AS system
+    FROM polymerelectrolytedata
+    WHERE ("Solvent 1 (S1)" IN ('PC', 'EC', 'EMC', 'DMC')
+    AND "Solvent 2 (S2)" IN ('PC',  'EC', 'EMC', 'DMC'))
+    OR "Solvent 1 (S1)" LIKE 'PEGDM%') t1
+    GROUP BY t1.system
+    HAVING COUNT(t1.system) > 10;
+    """
+    df = pd.read_sql_query(select, con=conn)
+    print(df)

@@ -1,0 +1,4 @@
+Solvent 1 (S1),S1 Weight %,Solvent 2 (S2),S2 Weight %,Salt 1,Salt1 Molality (mol salt/kg polymer),Temperature (K),Conductivity_test,Conductivity_pred,error
+PEGDME,0.849512086,,,Lithium Trifluoromethanesulfonate (Lithium triflate),1.135785908,423.15,2.702825,2.813943951687213,0.041112151799400004
+PEGDME,0.849512086,,,Lithium Trifluoromethanesulfonate (Lithium triflate),1.135785908,353.15,0.9913159999999999,1.0880987980412289,0.09763062236585411
+PEGDME,0.849512086,,,Lithium Trifluoromethanesulfonate (Lithium triflate),1.135785908,343.15,0.613591,0.8520100731092871,0.38856351072503853

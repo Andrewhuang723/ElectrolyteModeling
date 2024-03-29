@@ -1,9 +1,8 @@
 ### Run single task for electrolyte conductivity
 
 import warnings
+import os
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error, r2_score
-from scipy.optimize import differential_evolution, curve_fit
 import configparser
 import psycopg2
 import argparse
@@ -71,6 +70,7 @@ results_df = xtest.copy()
 results_df["Conductivity_test"] = ytest
 results_df["Conductivity_pred"] = ypred
 results_df["error"] = np.abs(ypred - ytest) / ytest
+
 if not os.path.exists(f"./data/semiempirical/{function_name}/{s1}_{s2}_{salt}"):
     os.mkdir(f"./data/semiempirical/{function_name}/{s1}_{s2}_{salt}")
 results_df.to_csv(f"./data/semiempirical/{function_name}/{s1}_{s2}_{salt}/results.csv", index=False)
