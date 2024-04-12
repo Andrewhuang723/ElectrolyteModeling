@@ -1,0 +1,57 @@
+# C3H6O3
+# DMC.lt
+
+import /Users/andrewhuang/Desktop/moltemplate/moltemplate/force_fields/oplsaa.lt
+
+
+DMC inherits OPLSAA {
+
+    write("Data Atoms"){
+
+        # AtomID        MolID       AtomType        charge      X    Y    Z
+        # $atom:        $mol:.      @atom:P4          0         0    0    0
+
+    
+        # AtomID 按顺序赋予编号即可，不能重复
+        # MolID  .令moltemplate自动按分子赋值
+        # @atom  从oplsaa.lt中charge部分查找种类编号,可以和Mass部分交叉验证
+        # charge 全部置零，生成时会按照力场自动替换
+        # 即便建模时非常生硬，在lammps 的minimize之后也可以迅速达到正常构型
+        
+        $atom:1    $mol:.   @atom:717  0.0     2.3937    0.0811    0.0881 # "C Propylene Carbonate CH3"
+        $atom:2    $mol:.   @atom:714  0.0     1.1633    0.4545    0.6768 # "O Propylene Carbonate C-O"
+        $atom:3    $mol:.   @atom:713  0.0     -0.0066    0.0781    0.0462 # "C Propylene Carbonate C=O"
+        $atom:4    $mol:.   @atom:712  0.0     0.0914   -0.5786   -1.0210 # "O Propylene Carbonate C=O"
+        $atom:5    $mol:.   @atom:714  0.0     -1.2614    0.4235    0.5891 # O Propylene Carbonate C-O"
+        $atom:6    $mol:.   @atom:717  0.0     -2.3943   -0.0134   -0.1394 # "C Propylene Carbonate CH3""
+        $atom:7    $mol:.   @atom:720  0.0     2.8614    0.9978   -0.3537 # "H Propylene Carbonate CH3"
+        $atom:8    $mol:.   @atom:720  0.0     3.0172   -0.3439    0.8995 # "H Propylene Carbonate CH3"
+        $atom:9    $mol:.   @atom:720  0.0     2.2378   -0.6963   -0.6870 # "H Propylene Carbonate CH3"
+        $atom:10    $mol:.  @atom:720  0.0     -3.0636    0.8637   -0.2376 # "H Propylene Carbonate CH3"
+        $atom:11    $mol:.  @atom:720  0.0     -2.1380   -0.4882   -1.0988 # "H Propylene Carbonate CH3"
+        $atom:12    $mol:.  @atom:720  0.0     -2.9009   -0.7784    0.5026 # "H Propylene Carbonate CH3"
+
+
+    }
+
+    write("Data Bond List"){
+
+        # 不需要手动输入bond type，会根据力场中的原子配对自动补全
+        # 同理，生成angle、dihedral、improper时也会自动补全他们的类型
+        # 这是这个软件最强大的地方
+
+        $bond:1    $atom:1    $atom:2
+        $bond:2    $atom:2    $atom:3
+        $bond:3    $atom:3    $atom:4
+        $bond:4    $atom:3    $atom:5
+        $bond:5    $atom:5    $atom:6
+        $bond:6    $atom:1    $atom:7
+        $bond:7    $atom:1    $atom:8
+        $bond:8    $atom:1    $atom:9
+        $bond:9    $atom:6    $atom:10
+        $bond:10    $atom:6    $atom:11
+        $bond:11    $atom:6    $atom:12
+
+    }
+
+}

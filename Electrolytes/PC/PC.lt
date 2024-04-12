@@ -1,0 +1,40 @@
+# C4H6O3
+# PC.lt
+
+import /Users/andrewhuang/Desktop/moltemplate/moltemplate/force_fields/oplsaa.lt
+
+PC inherits OPLSAA {
+
+    write("Data Atoms"){
+        $atom:1    $mol:.   @atom:717  0.0     -1.6325   -0.3916   -0.2095 # "C Propylene Carbonate CH3"
+        $atom:2    $mol:.   @atom:716  0.0     -0.2036   -0.3950    0.1862 # "C Propylene Carbonate CH"
+        $atom:3    $mol:.   @atom:715  0.0     0.3189    1.0068    0.5213 # "C Propylene Carbonate CH2"
+        $atom:4    $mol:.   @atom:714  0.0     1.7321    0.7371    0.4951 # "O Propylene Carbonate C-O"
+        $atom:5    $mol:.   @atom:713  0.0     1.9242   -0.2618   -0.4611 # "C Propylene Carbonate C=O"
+        $atom:6    $mol:.   @atom:712  0.0     3.0641   -0.6578   -0.8539 # O Propylene Carbonate C=O"
+        $atom:7    $mol:.   @atom:714  0.0     0.6781   -0.7153   -0.8780 # O Propylene Carbonate C-O"
+        $atom:8    $mol:.   @atom:720  0.0     -1.9463    0.5052   -0.7326 # "H Propylene Carbonate CH3"
+        $atom:9    $mol:.   @atom:720  0.0     -2.2990   -0.5852    0.6477 # "H Propylene Carbonate CH3"
+        $atom:10    $mol:.  @atom:720  0.0    -1.7998   -1.2544   -0.9152 # "H Propylene Carbonate CH3"
+        $atom:11    $mol:.  @atom:719   0.0    0.0351   -1.0530    1.0253 # "H Propylene Carbonate CH"
+        $atom:12    $mol:.  @atom:718   0.0    -0.0194    1.3590    1.4932 # "H Propylene Carbonate CH2"
+        $atom:13    $mol:.  @atom:728   0.0    0.1479    1.7063   -0.3184 # "H Propylene Carbonate CH2"
+    }
+
+    write("Data Bond List"){
+        $bond:1    $atom:1    $atom:2
+        $bond:2    $atom:2    $atom:3
+        $bond:3    $atom:3    $atom:4
+        $bond:4    $atom:4    $atom:5
+        $bond:5    $atom:5    $atom:6
+        $bond:6    $atom:5    $atom:7
+        $bond:7    $atom:7    $atom:2
+        $bond:8    $atom:1    $atom:8
+        $bond:9    $atom:1    $atom:9
+        $bond:10    $atom:1    $atom:10
+        $bond:11    $atom:2    $atom:11
+        $bond:12    $atom:3    $atom:12
+        $bond:13    $atom:3    $atom:13
+    }
+
+}

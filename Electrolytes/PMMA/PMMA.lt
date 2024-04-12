@@ -1,0 +1,65 @@
+import MMA.lt
+import MMA_end.lt
+
+PMMA inherits OPLSAA {
+
+  create_var {$mol}
+  # The line above forces all monomer subunits to share the same molecule-ID
+  # (Note: The molecule-ID number is optional and is usually ignored by LAMMPS.)
+
+  # Now create an array of N "MMA" objects distributed along the X axis
+
+  monomers = new MMA [100].rot(180,1,0,0).move(1.2533223,0,0)
+
+
+  #   Each monomer is rotated 180 degrees with respect to the previous
+  #   monomer, and then moved 1.2533223 Angstroms down the X axis.
+
+  # ---- Now, modify the ends: ---
+  # Delete the MMA groups at the end of the chain, and replace it with MMA_end.
+
+  delete monomers[0]
+
+  monomers[0] = new MMA_end
+
+  delete monomers[9]
+
+  monomers[9] = new MMA_end
+
+
+  # Move the MMA_end group to the correct location at the end of the chain:
+
+  monomers[0].rot(180.0,0,0,1).move(1.2533223,0,0)
+  # Note: 11.2799007 = (10-1) * 1.2533223
+
+  monomers[9].rot(180.0,0,0,1).move(11.2799007,0,0)
+  # Note: 11.2799007 = (10-1) * 1.2533223
+
+
+  # ----- list of monomers: -----
+  #
+  # (Note: move(), rot(), and rotvv() commands control the position
+  #  of each monomer.  (See the moltemplate manual for an explanation
+  #  of what they do.)  Commands enclosed in push() are cumulative
+  #  and remain in effect until removed by pop().)
+
+  # Now add a list of bonds connecting the carbon atoms together:
+
+
+  write("Data Bond List") {
+    $bond:genp_bond_nt1 $atom:monomers[0]/1 $atom:monomers[1]/2
+    $bond:genp_bond_nt2 $atom:monomers[1]/1 $atom:monomers[2]/2
+    $bond:genp_bond_nt3 $atom:monomers[2]/1 $atom:monomers[3]/2
+    $bond:genp_bond_nt4 $atom:monomers[3]/1 $atom:monomers[4]/2
+    $bond:genp_bond_nt5 $atom:monomers[4]/1 $atom:monomers[5]/2
+    $bond:genp_bond_nt6 $atom:monomers[5]/1 $atom:monomers[6]/2
+    $bond:genp_bond_nt7 $atom:monomers[6]/1 $atom:monomers[7]/2
+    $bond:genp_bond_nt8 $atom:monomers[7]/1 $atom:monomers[8]/2
+    $bond:genp_bond_nt9 $atom:monomers[8]/1 $atom:monomers[9]/2
+  }  # write("Data Bond List") {...
+
+
+}  # Polymer inherits OPLSAA
+
+
+

@@ -1,0 +1,29 @@
+# Derived variables.
+variable tcouple equal ${ts}*100
+variable pcouple equal ${ts}*1000
+
+# Output.
+thermo          $d
+thermo_style custom step etotal evdwl ecoul elong ebond eangle &
+edihed eimp ke pe temp press vol density cpu
+thermo_modify flush yes
+
+# Trajectory.
+#dump TRJ all dcd $d ${run}.dcd
+#dump_modify TRJ unwrap yes
+dump TRJ all atom 1000 dump.md.lammpstrj
+
+minimize 1.0e-4 1.0e-6 1000 10000
+
+# Thermalisation and relaxation, NPT ensemble.
+timestep       ${ts}
+fix             NPT all npt temp ${temp} ${temp} ${tcouple} iso $p $p ${pcouple}
+velocity all create ${temp} 858096 dist gaussian
+# Short runs to update the PPPM settings as the box shinks.
+run    ${equi} post no
+run    ${equi} post no
+run    ${equi} post no
+run    ${equi}
+# From now on, the density shouldn't change too much.
+run    ${prod}
+unfix NPT

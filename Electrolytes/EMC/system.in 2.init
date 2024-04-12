@@ -1,0 +1,24 @@
+units real
+atom_style full
+bond_style harmonic
+angle_style harmonic
+dihedral_style opls
+improper_style harmonic
+pair_style lj/cut/coul/long 11.0 11.0
+# (Note to self: The pair_style used by OPLSAA/M (2015) is:
+#                lj/charmm/coul/long 9.0 11.0
+#                ...so this will have to be updated eventually.)
+pair_modify mix geometric
+special_bonds lj/coul 0.0 0.0 0.5
+kspace_style pppm 0.0001
+# Input variables.
+variable run    string emc   # output name
+variable ts     equal  1         # timestep
+variable temp   equal  300       # equilibrium temperature
+variable p      equal  1.        # equilibrium pressure
+variable d      equal  1000      # output frequency
+variable equi   equal  5000      # Equilibration steps
+variable prod   equal  30000     # Production steps
+
+# PBC (set them before the creation of the box).
+boundary p p p

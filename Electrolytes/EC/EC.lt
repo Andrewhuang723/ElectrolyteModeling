@@ -1,0 +1,34 @@
+# C3H4O3
+# EC.lt
+
+import /Users/andrewhuang/Desktop/moltemplate/moltemplate/force_fields/oplsaa.lt
+
+EC inherits OPLSAA {
+
+    write("Data Atoms"){
+        $atom:1    $mol:.   @atom:715  0.0     -0.7293   -0.6360    0.1740 # "C Propylene Carbonate CH2"
+        $atom:2    $mol:.   @atom:715  0.0     -0.5214    0.8421    0.0350 # "C Propylene Carbonate CH2"
+        $atom:3    $mol:.   @atom:714  0.0     0.7346    0.8838   -0.6454 # "O Propylene Carbonate C-O"
+        $atom:4    $mol:.   @atom:713  0.0     1.4306   -0.2310   -0.1942 # "C Propylene Carbonate C=O"
+        $atom:5    $mol:.   @atom:712  0.0     2.6536   -0.4666   -0.3832 # "O Propylene Carbonate C=O"
+        $atom:6    $mol:.   @atom:714  0.0     0.5916   -1.0828    0.5128 # O Propylene Carbonate C-O"
+        $atom:7    $mol:.   @atom:718  0.0     -0.9671   -1.0524   -0.831 # H Propylene Carbonate CH2"
+        $atom:8    $mol:.   @atom:718  0.0     -1.4457   -0.9186    0.9506 # "H Propylene Carbonate CH2"
+        $atom:9    $mol:.   @atom:718  0.0     -0.4400    1.3435    1.0021 # "H Propylene Carbonate CH2"
+        $atom:10    $mol:.   @atom:718  0.0    -1.3068    1.3180   -0.6204 # "H Propylene Carbonate CH2"
+    }
+
+    write("Data Bond List"){
+        $bond:1    $atom:1    $atom:2
+        $bond:2    $atom:2    $atom:3
+        $bond:3    $atom:3    $atom:4
+        $bond:4    $atom:4    $atom:5
+        $bond:5    $atom:4    $atom:6
+        $bond:6    $atom:6    $atom:1
+        $bond:7    $atom:1    $atom:7
+        $bond:8    $atom:1    $atom:8
+        $bond:9    $atom:2    $atom:9
+        $bond:10    $atom:2    $atom:10
+    }
+
+}

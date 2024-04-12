@@ -1,0 +1,67 @@
+
+
+# ----------------- Init Section -----------------
+
+include "system.in.init"
+
+
+# ----------------- Atom Definition Section -----------------
+
+read_data "system.data"
+
+# ----------------- Settings Section -----------------
+
+include "system.in.settings"
+
+
+# ----------------- Charges Section -----------------
+
+include "system.in.charges"
+
+# ----------------- Charges 2 Section -----------------
+
+include "system.in.charges.2"
+
+# ----------------- Charges 3 Section -----------------
+
+include "system.in.charges.3"
+
+# ----------------- Init 2 Section -----------------
+
+include "system.in.init.2"
+
+# ----------------- Init 3 Section -----------------
+
+include "system.in.init.3"
+
+# ----------------- Init 4 Section -----------------
+
+include "system.in.init.4"
+
+# ----------------- Init 5 Section -----------------
+
+include "system.in.init.5"
+
+# ----------------- Init 6 Section -----------------
+
+include "system.in.init.6"
+
+# ----------------- Init 7 Section -----------------
+
+include "system.in.init.7"
+
+# ----------------- Run Section -----------------
+
+include "system.in.run"
+
+# ----------------- Run 2 Section -----------------
+
+include "system.in.run.2"
+
+# ----------------- Run 3 Section -----------------
+
+include "system.in.run.3"
+
+# ----------------- Settings 2 Section -----------------
+
+include "system.in.settings.2"
