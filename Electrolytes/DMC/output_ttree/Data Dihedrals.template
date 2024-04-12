@@ -1,8 +1,0 @@
-$/dihedral:bytype1 @/dihedral:OPLSAA/004_003_020_013 $/atom:DMC[0][0][0]/1 $/atom:DMC[0][0][0]/2 $/atom:DMC[0][0][0]/3 $/atom:DMC[0][0][0]/4
-$/dihedral:bytype2 @/dihedral:OPLSAA/004_003_020_013 $/atom:DMC[0][0][0]/4 $/atom:DMC[0][0][0]/3 $/atom:DMC[0][0][0]/5 $/atom:DMC[0][0][0]/6
-$/dihedral:bytype9 @/dihedral:OPLSAA/046_013_020_003 $/atom:DMC[0][0][0]/3 $/atom:DMC[0][0][0]/2 $/atom:DMC[0][0][0]/1 $/atom:DMC[0][0][0]/7
-$/dihedral:bytype10 @/dihedral:OPLSAA/046_013_020_003 $/atom:DMC[0][0][0]/3 $/atom:DMC[0][0][0]/2 $/atom:DMC[0][0][0]/1 $/atom:DMC[0][0][0]/8
-$/dihedral:bytype11 @/dihedral:OPLSAA/046_013_020_003 $/atom:DMC[0][0][0]/3 $/atom:DMC[0][0][0]/2 $/atom:DMC[0][0][0]/1 $/atom:DMC[0][0][0]/9
-$/dihedral:bytype12 @/dihedral:OPLSAA/046_013_020_003 $/atom:DMC[0][0][0]/3 $/atom:DMC[0][0][0]/5 $/atom:DMC[0][0][0]/6 $/atom:DMC[0][0][0]/10
-$/dihedral:bytype13 @/dihedral:OPLSAA/046_013_020_003 $/atom:DMC[0][0][0]/3 $/atom:DMC[0][0][0]/5 $/atom:DMC[0][0][0]/6 $/atom:DMC[0][0][0]/11
-$/dihedral:bytype14 @/dihedral:OPLSAA/046_013_020_003 $/atom:DMC[0][0][0]/3 $/atom:DMC[0][0][0]/5 $/atom:DMC[0][0][0]/6 $/atom:DMC[0][0][0]/12
