@@ -8,7 +8,7 @@ improper_style harmonic
 pair_style lj/cut/coul/long 11.0 11.0
 pair_modify mix geometric
 special_bonds lj/coul 0.0 0.0 0.5
-kspace_style pppm 0.0001
+kspace_style pppm 0.00001
 
 
 region box block -100 100 -100 100 -100 100
@@ -28,27 +28,28 @@ include ../../PARM_AFTER.lammps
 
 ## Create EC molecules
 molecule ecmol ../../EC/molecule.txt
-create_atoms 0 random 250 45615 NULL mol & 
+create_atoms 0 random 230 45615 NULL mol & 
     ecmol 14756 overlap 1 maxtry 50
-
+group sovlent include molecule
 
 ## Create DEC molecules
 molecule decmol ../../DEC/molecule.txt
-create_atoms 2 random 300 34512 NULL mol & 
-decmol 21345 overlap 1 maxtry 30
+create_atoms 2 random 180 34512 NULL mol & 
+decmol 21345 overlap 1 maxtry 50
+group solvent include molecule
 
 # Create PMMA molecules
-molecule pmmamol ../../PMMA/molecule.txt
-create_atoms 3 random 10 34125 NULL mol & 
-pmmamol 23415 overlap 1 maxtry 30
+# molecule pmmamol ../../PMMA/molecule.txt
+# create_atoms 3 random 1 34125 NULL mol & 
+# pmmamol 23415 overlap 1 maxtry 50
 
-minimize 1.0e-4 1.0e-6 100 1000
+minimize 1.0e-4 1.0e-6 1000 100
 reset_timestep 0
 
 
 ## Delete atoms to avoid high density
-# delete_atoms random fraction 0.15 yes EC NULL 14756 mol yes
-# delete_atoms random fraction 0.15 yes EMC NULL 65147 mol yes
+delete_atoms random fraction 0.15 yes solvent NULL 65147 mol yes
+# delete_atoms random fraction 0.15 yes decmol NULL 65147 mol yes
 
 
 ## Run

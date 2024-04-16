@@ -1,0 +1,46 @@
+boundary p p p
+units real
+atom_style full
+bond_style harmonic
+angle_style harmonic
+dihedral_style opls
+improper_style harmonic
+pair_style lj/cut/coul/long 12
+kspace_style pppm 1e-3
+
+read_data ../minimization/system.data
+include ../../PARM_AFTER.lammps
+
+## group
+
+group PMMA type 81 84 80 406 407 408 409 89 85
+group topull1 type 81
+group topull2 type 84
+
+# variable f0 equal 5
+variable x1 equal xcm(topull1,x)
+variable x2 equal xcm(topull2,x)
+variable y1 equal xcm(topull1,y)
+variable y2 equal xcm(topull2,y)
+variable z1 equal xcm(topull1,z)
+variable z2 equal xcm(topull2,z)
+variable delta_r equal sqrt((v_x1-v_x2)^2+(v_y1-v_y2)^2+(v_z1-v_z2)^2)
+
+# S_total
+compute my_entropy all entropy/atom 0.25 5. avg yes 5.
+
+fix mynpt all npt temp 300 300 100 x 1 1 1000
+timestep 1.0
+
+## Dump traj
+# dump myent all custom 100 dump.entropy c_my_entropy
+dump mydmp all custom 1000 dump.lammpstrj x y z type id c_my_entropy
+
+## print
+thermo 1000
+thermo_style custom step etotal enthalpy evdwl ecoul elong ebond eangle &
+edihed eimp ke pe temp press vol density cpu v_delta_r
+
+
+run 30000
+write_data system.data

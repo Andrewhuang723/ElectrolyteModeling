@@ -11,7 +11,7 @@ improper_style harmonic
 pair_style lj/cut/coul/long 11.0 11.0
 pair_modify mix geometric
 special_bonds lj/coul 0.0 0.0 0.5
-kspace_style pppm 0.0001
+kspace_style pppm 0.00001
 
 
 region box block -100 100 -100 100 -100 100
@@ -4079,11 +4079,12 @@ Read molecule template ecmol:
   17 angles with max type 7
   28 dihedrals with max type 11
   1 impropers with max type 1
-create_atoms 0 random 250 45615 NULL mol     ecmol 14756 overlap 1 maxtry 50
-Created 2500 atoms
+create_atoms 0 random 230 45615 NULL mol     ecmol 14756 overlap 1 maxtry 50
+Created 2300 atoms
   using lattice units in orthogonal box = (-100 -100 -100) to (100 100 100)
-  create_atoms CPU = 0.058 seconds
-
+  create_atoms CPU = 0.191 seconds
+group sovlent include molecule
+0 atoms in group sovlent
 
 ## Create DEC molecules
 molecule decmol ../../DEC/molecule.txt
@@ -4095,37 +4096,28 @@ Read molecule template decmol:
   28 angles with max type 398
   26 dihedrals with max type 269
   2 impropers with max type 1
-create_atoms 2 random 300 34512 NULL mol decmol 21345 overlap 1 maxtry 30
-Created 5400 atoms
+create_atoms 2 random 180 34512 NULL mol decmol 21345 overlap 1 maxtry 50
+Created 3240 atoms
   using lattice units in orthogonal box = (-100 -100 -100) to (100 100 100)
-  create_atoms CPU = 0.117 seconds
+  create_atoms CPU = 0.062 seconds
+group solvent include molecule
+0 atoms in group solvent
 
 # Create PMMA molecules
-molecule pmmamol ../../PMMA/molecule.txt
-Read molecule template pmmamol:
-  1 molecules
-  0 fragments
-  150 atoms with max type 409
-  149 bonds with max type 125
-  274 angles with max type 398
-  360 dihedrals with max type 269
-  20 impropers with max type 1
-create_atoms 3 random 10 34125 NULL mol pmmamol 23415 overlap 1 maxtry 30
-Created 1500 atoms
-  using lattice units in orthogonal box = (-100 -100 -100) to (100 100 100)
-  create_atoms CPU = 0.037 seconds
+# molecule pmmamol ../../PMMA/molecule.txt
+# create_atoms 3 random 1 34125 NULL mol # pmmamol 23415 overlap 1 maxtry 50
 
-minimize 1.0e-4 1.0e-6 100 1000
+minimize 1.0e-4 1.0e-6 1000 100
 PPPM initialization ...
-WARNING: System is not charge neutral, net charge = 65.6 (src/kspace.cpp:327)
+WARNING: System is not charge neutral, net charge = 28.8 (src/kspace.cpp:327)
   using 12-bit tables for long-range coulomb (src/kspace.cpp:342)
-  G vector (1/distance) = 0.15865277
-  grid = 36 36 36
+  G vector (1/distance) = 0.20867733
+  grid = 64 64 64
   stencil order = 5
-  estimated absolute RMS force accuracy = 0.042510011
-  estimated relative force accuracy = 0.00012801764
+  estimated absolute RMS force accuracy = 0.0040656833
+  estimated relative force accuracy = 1.2243684e-05
   using double precision FFTW3
-  3d grid and FFT values/proc = 21689 11664
+  3d grid and FFT values/proc = 94461 65536
 Generated 409965 of 409965 mixed pair_coeff terms from geometric mixing rule
 Neighbor list info ...
   update: every = 1 steps, delay = 0 steps, check = yes
@@ -4139,44 +4131,117 @@ Neighbor list info ...
       pair build: half/bin/newton
       stencil: half/bin/3d
       bin: standard
-Per MPI rank memory allocation (min/avg/max) = 1035 | 1035 | 1035 Mbytes
+Per MPI rank memory allocation (min/avg/max) = 1042 | 1042 | 1042 Mbytes
    Step          Temp          E_pair         E_mol          TotEng         Press     
-         0   0              60142.138      9739498.1      9799640.3     -60500.869    
-       100   0              104776.03      500207.99      604984.02     -247.35858    
-Loop time of 1.00015 on 4 procs for 100 steps with 9400 atoms
+         0   0              15156.718      1089898.6      1105055.3     -7374.6383    
+        68   0              13065.197      30327.161      43392.357     -10.46122     
+Loop time of 2.54739 on 4 procs for 68 steps with 5540 atoms
 
-93.4% CPU use with 4 MPI tasks x 1 OpenMP threads
+95.7% CPU use with 4 MPI tasks x 1 OpenMP threads
 
 Minimization stats:
-  Stopping criterion = max iterations
+  Stopping criterion = max force evaluations
   Energy initial, next-to-last, final = 
-      9799640.26768146   627403.453817502   604984.015259039
-  Force two-norm initial, final = 182935.14 14095.862
-  Force max component initial, final = 15931.036 894.71037
-  Final line search alpha, max atom move = 0.00010660083 0.095376872
-  Iterations, force evaluations = 100 100
+      1105055.32053794   43404.5640785163   43392.3574832553
+  Force two-norm initial, final = 52478.404 286.51755
+  Force max component initial, final = 2643.2927 65.107552
+  Final line search alpha, max atom move = 0.0035783382 0.23297684
+  Iterations, force evaluations = 68 100
 
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg| %total
 ---------------------------------------------------------------
-Pair    | 0.19119    | 0.23954    | 0.28712    |   7.1 | 23.95
-Bond    | 0.12706    | 0.14167    | 0.15167    |   2.5 | 14.17
-Kspace  | 0.50185    | 0.55966    | 0.62307    |   5.9 | 55.96
-Neigh   | 0.034666   | 0.034724   | 0.034796   |   0.0 |  3.47
-Comm    | 0.0080272  | 0.008408   | 0.0086764  |   0.3 |  0.84
-Output  | 3.1575e-05 | 3.5494e-05 | 4.6694e-05 |   0.0 |  0.00
+Pair    | 0.099194   | 0.11299    | 0.12467    |   2.9 |  4.44
+Bond    | 0.11999    | 0.12452    | 0.13454    |   1.7 |  4.89
+Kspace  | 2.2613     | 2.2832     | 2.2989     |   0.9 | 89.63
+Neigh   | 0.0085458  | 0.0085497  | 0.0085587  |   0.0 |  0.34
+Comm    | 0.0070518  | 0.0072139  | 0.0074642  |   0.2 |  0.28
+Output  | 0          | 0          | 0          |   0.0 |  0.00
 Modify  | 0          | 0          | 0          |   0.0 |  0.00
-Other   |            | 0.01611    |            |       |  1.61
+Other   |            | 0.01091    |            |       |  0.43
 
-Nlocal:           2350 ave        2452 max        2191 min
-Histogram: 1 0 0 0 1 0 0 0 0 2
-Nghost:           1825 ave        1913 max        1687 min
-Histogram: 1 0 0 0 0 0 0 2 0 1
-Neighs:        48919.5 ave       59514 max       38718 min
-Histogram: 1 0 0 1 0 0 1 0 0 1
+Nlocal:           1385 ave        1483 max        1307 min
+Histogram: 1 1 0 0 0 1 0 0 0 1
+Nghost:        1083.25 ave        1184 max        1022 min
+Histogram: 2 0 0 0 1 0 0 0 0 1
+Neighs:        13436.8 ave       14902 max       11624 min
+Histogram: 1 0 0 1 0 0 0 0 1 1
 
-Total # of neighbors = 195678
-Ave neighs/atom = 20.816809
-Ave special neighs/atom = 8.5702128
-Neighbor list builds = 9
+Total # of neighbors = 53747
+Ave neighs/atom = 9.7016245
+Ave special neighs/atom = 8.2129964
+Neighbor list builds = 3
 Dangerous builds = 0
+reset_timestep 0
+
+
+## Delete atoms to avoid high density
+delete_atoms random fraction 0.15 yes solvent NULL 65147 mol yes
+WARNING: Ignoring 'compress yes' for molecular system (src/delete_atoms.cpp:140)
+Deleted 0 atoms, new total = 5540
+Deleted 0 bonds, new total = 5360
+Deleted 0 angles, new total = 8950
+Deleted 0 dihedrals, new total = 11120
+Deleted 0 impropers, new total = 590
+# delete_atoms random fraction 0.15 yes decmol NULL 65147 mol yes
+
+
+## Run
+run 0
+WARNING: No fixes with time integration, atoms won't move (src/verlet.cpp:60)
+PPPM initialization ...
+  using 12-bit tables for long-range coulomb (src/kspace.cpp:342)
+  G vector (1/distance) = 0.20867733
+  grid = 64 64 64
+  stencil order = 5
+  estimated absolute RMS force accuracy = 0.0040656833
+  estimated relative force accuracy = 1.2243684e-05
+  using double precision FFTW3
+  3d grid and FFT values/proc = 94461 65536
+Generated 409965 of 409965 mixed pair_coeff terms from geometric mixing rule
+Per MPI rank memory allocation (min/avg/max) = 1041 | 1041 | 1041 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press     
+         0   0              13065.197      30327.161      43392.357     -10.46122     
+Loop time of 0.000254451 on 4 procs for 0 steps with 5540 atoms
+
+69.0% CPU use with 4 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Bond    | 0          | 0          | 0          |   0.0 |  0.00
+Kspace  | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.0002545  |            |       |100.00
+
+Nlocal:           1385 ave        1484 max        1308 min
+Histogram: 1 1 0 0 0 1 0 0 0 1
+Nghost:         1083.5 ave        1185 max        1024 min
+Histogram: 2 0 0 0 1 0 0 0 0 1
+Neighs:        13423.2 ave       14906 max       11614 min
+Histogram: 1 0 0 1 0 0 0 0 1 1
+
+Total # of neighbors = 53693
+Ave neighs/atom = 9.6918773
+Ave special neighs/atom = 8.2129964
+Neighbor list builds = 0
+Dangerous builds = 0
+
+write_data system.data
+System init for write_data ...
+PPPM initialization ...
+  using 12-bit tables for long-range coulomb (src/kspace.cpp:342)
+  G vector (1/distance) = 0.20867733
+  grid = 64 64 64
+  stencil order = 5
+  estimated absolute RMS force accuracy = 0.0040656833
+  estimated relative force accuracy = 1.2243684e-05
+  using double precision FFTW3
+  3d grid and FFT values/proc = 94461 65536
+Generated 409965 of 409965 mixed pair_coeff terms from geometric mixing rule
+write_dump all atom dump.lammpstrj
+Total wall time: 0:00:03

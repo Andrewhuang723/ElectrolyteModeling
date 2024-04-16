@@ -6,33 +6,28 @@ angle_style harmonic
 dihedral_style opls
 improper_style harmonic
 pair_style lj/cut/coul/long 12
-kspace_style pppm 1e-5
+kspace_style pppm 1e-3
 
 read_data ../minimization/system.data
 
 include ../../PARM_AFTER.lammps
 
-compute delta_s all entropy/atom 0.25 5. avg yes 5.
+# Delta S_mix
+compute my_entropy all entropy/atom 0.25 5. avg yes 5.
+
+
+fix mynpt all npt temp 300 300 100 x 1 1 1000
+timestep 1.0
 
 ## Dump traj
-dump myent all custom 100 dump.entropy c_delta_s
-dump mydmp all atom 1000 dump.lammpstrj
+# dump myent all custom 100 dump.entropy c_my_entropy
+dump mydmp all custom 1000 dump.lammpstrj x y z type id c_my_entropy
+
 
 ## print
 thermo 500
 thermo_style custom step etotal enthalpy evdwl ecoul elong ebond eangle &
-edihed eimp ke pe temp press vol density cpu 
-
-# fix mynve all nve
-# fix myber all temp/berendsen 300 300 100
-# fix myrct all recenter NULL NULL 0
-
-fix mynpt all npt temp 300 300 100 x 1 1 1000
-
-variable myenthalpy equal enthalpy
-fix myat3 all ave/time 10 10 100 v_myenthalpy file enthalpy.dat
-timestep 1.0
-
+edihed eimp ke pe temp press vol density cpu
 
 
 run 30000
