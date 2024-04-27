@@ -4,7 +4,7 @@ variable pcouple equal ${ts}*1000
 
 # Output.
 thermo          $d
-thermo_style custom step etotal evdwl ecoul elong ebond eangle &
+thermo_style custom step etotal enthalpy evdwl ecoul elong ebond eangle &
 edihed eimp ke pe temp press vol density cpu
 thermo_modify flush yes
 

@@ -1,0 +1,23 @@
+
+        # 不需要手动输入bond type，会根据力场中的原子配对自动补全
+        # 同理，生成angle、dihedral、improper时也会自动补全他们的类型
+        # 这是这个软件最强大的地方
+
+        $/bond:DEC[0][0][0]/1    $/atom:DEC[0][0][0]/1    $/atom:DEC[0][0][0]/2
+        $/bond:DEC[0][0][0]/2    $/atom:DEC[0][0][0]/2    $/atom:DEC[0][0][0]/3
+        $/bond:DEC[0][0][0]/3    $/atom:DEC[0][0][0]/3    $/atom:DEC[0][0][0]/4
+        $/bond:DEC[0][0][0]/4    $/atom:DEC[0][0][0]/4    $/atom:DEC[0][0][0]/5
+        $/bond:DEC[0][0][0]/5    $/atom:DEC[0][0][0]/4    $/atom:DEC[0][0][0]/6
+        $/bond:DEC[0][0][0]/6    $/atom:DEC[0][0][0]/6    $/atom:DEC[0][0][0]/7
+        $/bond:DEC[0][0][0]/7    $/atom:DEC[0][0][0]/7    $/atom:DEC[0][0][0]/8
+        $/bond:DEC[0][0][0]/8    $/atom:DEC[0][0][0]/1    $/atom:DEC[0][0][0]/9
+        $/bond:DEC[0][0][0]/9    $/atom:DEC[0][0][0]/1    $/atom:DEC[0][0][0]/10
+        $/bond:DEC[0][0][0]/10    $/atom:DEC[0][0][0]/1    $/atom:DEC[0][0][0]/11
+        $/bond:DEC[0][0][0]/11    $/atom:DEC[0][0][0]/2    $/atom:DEC[0][0][0]/12
+        $/bond:DEC[0][0][0]/12    $/atom:DEC[0][0][0]/2    $/atom:DEC[0][0][0]/13
+        $/bond:DEC[0][0][0]/13    $/atom:DEC[0][0][0]/7    $/atom:DEC[0][0][0]/14
+        $/bond:DEC[0][0][0]/14    $/atom:DEC[0][0][0]/7    $/atom:DEC[0][0][0]/15
+        $/bond:DEC[0][0][0]/15    $/atom:DEC[0][0][0]/8    $/atom:DEC[0][0][0]/16
+        $/bond:DEC[0][0][0]/16    $/atom:DEC[0][0][0]/8    $/atom:DEC[0][0][0]/17
+        $/bond:DEC[0][0][0]/17    $/atom:DEC[0][0][0]/8    $/atom:DEC[0][0][0]/18
+

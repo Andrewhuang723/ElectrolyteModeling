@@ -5,9 +5,9 @@ EC = new EC[1].move(8.0, 0, 0)
              [1].move(0, 0, 8.0)
 
 write_once("Data Boundary") {
-  -100 100 xlo xhi
-  -100 100 ylo yhi
-  -100 100 zlo zhi
+  -10 10 xlo xhi
+  -10 10 ylo yhi
+  -10 10 zlo zhi
 }
 
 # Create an input deck for LAMMPS.

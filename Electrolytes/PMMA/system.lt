@@ -3,9 +3,7 @@ import "/Users/andrewhuang/Desktop/moltemplate/moltemplate/force_fields/oplsaa.l
 
 
 
-PMMA = new PMMA[1].move(3.0, 0, 0)
-             [1].move(0, 3.0, 0)
-             [1].move(0, 0, 3.0)
+PMMA = new PMMA[1]
 
 write_once("Data Boundary") {
   -100 100 xlo xhi

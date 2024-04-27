@@ -9,7 +9,7 @@ PMMA inherits OPLSAA {
 
   # Now create an array of N "MMA" objects distributed along the X axis
 
-  monomers = new MMA [100].rot(180,1,0,0).move(1.2533223,0,0)
+  monomers = new MMA [10].rot(180,1,0,0).move(1.2533223,0,0)
 
 
   #   Each monomer is rotated 180 degrees with respect to the previous

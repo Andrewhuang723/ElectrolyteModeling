@@ -21,3 +21,4 @@ include "system.in.charges"
 # ----------------- Run Section -----------------
 
 include "system.in.run"
+write_data system_after.data

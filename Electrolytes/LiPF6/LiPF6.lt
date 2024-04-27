@@ -1,0 +1,26 @@
+# LiPF6.lt
+
+import /Users/andrewhuang/Desktop/moltemplate/moltemplate/force_fields/oplsaa.lt
+LiPF6 inherits OPLSAA {
+
+  write("Data Atoms") {
+      $atom:1    $mol:.  @atom:348      0.0     0.0000    0.0000    0.0000
+      $atom:2    $mol:.  @atom:727      0.0     1.0000    0.0000    0.0000
+      $atom:3    $mol:.  @atom:726      0.0     2.2990    0.7500    0.0000
+      $atom:4    $mol:.  @atom:727      0.0     2.2990   -0.7500    0.0000
+      $atom:5    $mol:.  @atom:727      0.0     3.5981    0.0000    0.0000
+      $atom:6    $mol:.  @atom:727      0.0     2.2990    2.2500    0.0000
+      $atom:7    $mol:.  @atom:727      0.0     2.2990    2.2500    0.0000
+      $atom:8    $mol:.  @atom:727      0.0     1.0000    1.5000    0.0000 
+}
+
+  write("Data Bond List") {
+      $bond:1  $atom:2   $atom:3
+      $bond:2  $atom:3   $atom:4
+      $bond:3  $atom:3   $atom:5
+      $bond:4  $atom:3   $atom:6
+      $bond:5  $atom:3   $atom:7
+      $bond:6  $atom:3   $atom:8
+  }
+
+}

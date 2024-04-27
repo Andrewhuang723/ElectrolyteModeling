@@ -1,0 +1,31 @@
+# LiDFOB.lt
+
+import /Users/andrewhuang/Desktop/moltemplate/moltemplate/force_fields/oplsaa.lt
+LiDFOB inherits OPLSAA {
+
+  write("Data Atoms") {
+      $atom:1    $mol:.  @atom:      0.0     -2.0624674380583174 -0.12292699820861586 1.1881038041704561
+      $atom:2    $mol:.  @atom:      0.0     -1.2332885833755909 -0.036826909914939296 -0.0035835837260500165
+      $atom:3    $mol:.  @atom:      0.0     -0.3494955705423134 1.1824054689402779 0.06030835809800811
+      $atom:4    $mol:.  @atom:      0.0     0.9637943233053223 0.7479233694127702 0.039773596750809326
+      $atom:5    $mol:.  @atom:      0.0     1.006918718545663 -0.6890757976603451 -0.03404671054747664
+      $atom:6    $mol:.  @atom:      0.0     -0.27796505067691973 -1.2011413300073257 -0.062133305338498174
+      $atom:7    $mol:.  @atom:      0.0     2.0494673244446795 -1.3934371773555672 -0.06883088917394026
+      $atom:8    $mol:.  @atom:      0.0     1.9622378767309834 1.5132302099400075 0.08048488206669197
+      $atom:9    $mol:.  @atom:      0.0     -2.0592016003734317 -0.00015083514633009958 -1.2000761523000245
+      $atom:10    $mol:.  @atom:      0.0     0.0 0.0 0.0
+  }
+
+  write("Data Bond List") {
+      $bond:1  $atom:1   $atom:2
+      $bond:2  $atom:2   $atom:3
+      $bond:3  $atom:3   $atom:4
+      $bond:4  $atom:4   $atom:5
+      $bond:5  $atom:5   $atom:6
+      $bond:6  $atom:5   $atom:7
+      $bond:7  $atom:4   $atom:8
+      $bond:8  $atom:2   $atom:9
+      $bond:9  $atom:6   $atom:2
+  }
+
+}

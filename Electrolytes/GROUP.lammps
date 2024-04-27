@@ -1,0 +1,3 @@
+group PF6 type 726 727
+group Li type 348
+group ions union PF6 Li

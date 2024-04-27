@@ -1,0 +1,30 @@
+# LiFSI.lt
+
+import /Users/andrewhuang/Desktop/moltemplate/moltemplate/force_fields/oplsaa.lt
+LiFSI inherits OPLSAA {
+
+  write("Data Atoms") {
+      $atom:1    $mol:.  @atom:      0.0     0.0 0.0 0.0
+      $atom:2    $mol:.  @atom:      0.0     0.1828203589608984 -0.5115278848306273 -0.9399983356814654
+      $atom:3    $mol:.  @atom:      0.0     -1.3729944221487074 -0.3623290705652888 -0.18854626697964094
+      $atom:4    $mol:.  @atom:      0.0     -1.830179749485259 1.0682961743751065 -0.24068386840253828
+      $atom:5    $mol:.  @atom:      0.0     -2.3588421801861665 -1.220462043283117 -0.9288658480185363
+      $atom:6    $mol:.  @atom:      0.0     -1.3027974932124178 -0.8691681458250309 1.4061409899572546
+      $atom:7    $mol:.  @atom:      0.0     1.3664624870063895 0.29964179479537717 0.034502674307593816
+      $atom:8    $mol:.  @atom:      0.0     1.489684826011464 -0.37979798964304645 1.369265098233842
+      $atom:9    $mol:.  @atom:      0.0     0.9801280755617321 1.7383967096801667 0.23418582049528805
+      $atom:10    $mol:.  @atom:      0.0     2.845718097492056 0.23695045529646547 -0.7460002639118025
+  }
+
+  write("Data Bond List") {
+      $bond:1  $atom:2   $atom:3
+      $bond:2  $atom:3   $atom:4
+      $bond:3  $atom:3   $atom:5
+      $bond:4  $atom:3   $atom:6
+      $bond:5  $atom:2   $atom:7
+      $bond:6  $atom:7   $atom:8
+      $bond:7  $atom:7   $atom:9
+      $bond:8  $atom:7   $atom:10
+  }
+
+}

@@ -1,0 +1,43 @@
+boundary p p p
+units real
+atom_style full
+bond_style harmonic
+angle_style harmonic
+dihedral_style opls
+improper_style harmonic
+pair_style lj/cut/coul/long 11.0 11.0
+pair_modify mix geometric
+special_bonds lj/coul 0.0 0.0 0.5
+kspace_style pppm 1e-5
+
+region box block -100 100 -100 100 -100 100
+create_box 906 box &
+bond/types 379 &
+angle/types 1017 &
+dihedral/types 800 &
+improper/types 6 &
+extra/bond/per/atom 1000 &
+extra/angle/per/atom 1000 &
+extra/dihedral/per/atom 1000 &
+extra/improper/per/atom 1000 &
+extra/special/per/atom 400
+
+
+include ../../PARM_AFTER.lammps
+
+# Create EC molecules
+molecule ecmol ../../EC/molecule.txt
+create_atoms 0 random 230 12345 NULL mol &
+ecmol 13245 overlap 1 maxtry 50
+
+# Create PC molecules
+molecule pcmol ../../PC/molecule.txt
+create_atoms 1 random 100 23451 NULL mol &
+pcmol 24351 overlap 1 maxtry 50
+
+# Create EMC molecules
+molecule emcmol ../../EMC/molecule.txt
+create_atoms 2 random 50 34512 NULL mol &
+emcmol 35412 overlap 1 maxtry 50
+
+# Create 

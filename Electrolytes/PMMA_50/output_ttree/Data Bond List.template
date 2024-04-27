@@ -1,3 +1,17 @@
+        $/bond:PMMA[0]/monomers[0]/1    $/atom:PMMA[0]/monomers[0]/1    $/atom:PMMA[0]/monomers[0]/2
+        $/bond:PMMA[0]/monomers[0]/2    $/atom:PMMA[0]/monomers[0]/2    $/atom:PMMA[0]/monomers[0]/3
+        $/bond:PMMA[0]/monomers[0]/3    $/atom:PMMA[0]/monomers[0]/2    $/atom:PMMA[0]/monomers[0]/4
+        $/bond:PMMA[0]/monomers[0]/4    $/atom:PMMA[0]/monomers[0]/4    $/atom:PMMA[0]/monomers[0]/5
+        $/bond:PMMA[0]/monomers[0]/5    $/atom:PMMA[0]/monomers[0]/4    $/atom:PMMA[0]/monomers[0]/6
+        $/bond:PMMA[0]/monomers[0]/6    $/atom:PMMA[0]/monomers[0]/6    $/atom:PMMA[0]/monomers[0]/7
+        $/bond:PMMA[0]/monomers[0]/7    $/atom:PMMA[0]/monomers[0]/1    $/atom:PMMA[0]/monomers[0]/8
+        $/bond:PMMA[0]/monomers[0]/8    $/atom:PMMA[0]/monomers[0]/1    $/atom:PMMA[0]/monomers[0]/9
+        $/bond:PMMA[0]/monomers[0]/9    $/atom:PMMA[0]/monomers[0]/3    $/atom:PMMA[0]/monomers[0]/10
+        $/bond:PMMA[0]/monomers[0]/10    $/atom:PMMA[0]/monomers[0]/3    $/atom:PMMA[0]/monomers[0]/11
+        $/bond:PMMA[0]/monomers[0]/11    $/atom:PMMA[0]/monomers[0]/3    $/atom:PMMA[0]/monomers[0]/12
+        $/bond:PMMA[0]/monomers[0]/12    $/atom:PMMA[0]/monomers[0]/7    $/atom:PMMA[0]/monomers[0]/13
+        $/bond:PMMA[0]/monomers[0]/13    $/atom:PMMA[0]/monomers[0]/7    $/atom:PMMA[0]/monomers[0]/14
+        $/bond:PMMA[0]/monomers[0]/14    $/atom:PMMA[0]/monomers[0]/7    $/atom:PMMA[0]/monomers[0]/15
         $/bond:PMMA[0]/monomers[1]/1    $/atom:PMMA[0]/monomers[1]/1    $/atom:PMMA[0]/monomers[1]/2
         $/bond:PMMA[0]/monomers[1]/2    $/atom:PMMA[0]/monomers[1]/2    $/atom:PMMA[0]/monomers[1]/3
         $/bond:PMMA[0]/monomers[1]/3    $/atom:PMMA[0]/monomers[1]/2    $/atom:PMMA[0]/monomers[1]/4
@@ -670,20 +684,6 @@
         $/bond:PMMA[0]/monomers[48]/12    $/atom:PMMA[0]/monomers[48]/7    $/atom:PMMA[0]/monomers[48]/13
         $/bond:PMMA[0]/monomers[48]/13    $/atom:PMMA[0]/monomers[48]/7    $/atom:PMMA[0]/monomers[48]/14
         $/bond:PMMA[0]/monomers[48]/14    $/atom:PMMA[0]/monomers[48]/7    $/atom:PMMA[0]/monomers[48]/15
-        $/bond:PMMA[0]/monomers[0]/1    $/atom:PMMA[0]/monomers[0]/1    $/atom:PMMA[0]/monomers[0]/2
-        $/bond:PMMA[0]/monomers[0]/2    $/atom:PMMA[0]/monomers[0]/2    $/atom:PMMA[0]/monomers[0]/3
-        $/bond:PMMA[0]/monomers[0]/3    $/atom:PMMA[0]/monomers[0]/2    $/atom:PMMA[0]/monomers[0]/4
-        $/bond:PMMA[0]/monomers[0]/4    $/atom:PMMA[0]/monomers[0]/4    $/atom:PMMA[0]/monomers[0]/5
-        $/bond:PMMA[0]/monomers[0]/5    $/atom:PMMA[0]/monomers[0]/4    $/atom:PMMA[0]/monomers[0]/6
-        $/bond:PMMA[0]/monomers[0]/6    $/atom:PMMA[0]/monomers[0]/6    $/atom:PMMA[0]/monomers[0]/7
-        $/bond:PMMA[0]/monomers[0]/7    $/atom:PMMA[0]/monomers[0]/1    $/atom:PMMA[0]/monomers[0]/8
-        $/bond:PMMA[0]/monomers[0]/8    $/atom:PMMA[0]/monomers[0]/1    $/atom:PMMA[0]/monomers[0]/9
-        $/bond:PMMA[0]/monomers[0]/9    $/atom:PMMA[0]/monomers[0]/3    $/atom:PMMA[0]/monomers[0]/10
-        $/bond:PMMA[0]/monomers[0]/10    $/atom:PMMA[0]/monomers[0]/3    $/atom:PMMA[0]/monomers[0]/11
-        $/bond:PMMA[0]/monomers[0]/11    $/atom:PMMA[0]/monomers[0]/3    $/atom:PMMA[0]/monomers[0]/12
-        $/bond:PMMA[0]/monomers[0]/12    $/atom:PMMA[0]/monomers[0]/7    $/atom:PMMA[0]/monomers[0]/13
-        $/bond:PMMA[0]/monomers[0]/13    $/atom:PMMA[0]/monomers[0]/7    $/atom:PMMA[0]/monomers[0]/14
-        $/bond:PMMA[0]/monomers[0]/14    $/atom:PMMA[0]/monomers[0]/7    $/atom:PMMA[0]/monomers[0]/15
         $/bond:PMMA[0]/monomers[49]/1    $/atom:PMMA[0]/monomers[49]/1    $/atom:PMMA[0]/monomers[49]/2
         $/bond:PMMA[0]/monomers[49]/2    $/atom:PMMA[0]/monomers[49]/2    $/atom:PMMA[0]/monomers[49]/3
         $/bond:PMMA[0]/monomers[49]/3    $/atom:PMMA[0]/monomers[49]/2    $/atom:PMMA[0]/monomers[49]/4

@@ -4,7 +4,7 @@ variable pcouple equal ${ts}*1000
 
 # Output.
 thermo          $d
-thermo_style custom step etotal evdwl ecoul elong ebond eangle &
+thermo_style custom step etotal enthalpy evdwl ecoul elong ebond eangle &
 edihed eimp ke pe temp press vol density cpu
 thermo_modify flush yes
 
@@ -16,6 +16,11 @@ dump_modify TRJ unwrap yes
 timestep       ${ts}
 fix             NPT all npt temp ${temp} ${temp} ${tcouple} iso $p $p ${pcouple}
 velocity all create ${temp} 858096 dist gaussian
+
+variable myenthalpy equal enthalpy
+fix myat3 all ave/time 10 10 100 v_myenthalpy file enthalpy.dat
+timestep 1.0
+
 # Short runs to update the PPPM settings as the box shinks.
 run    ${equi} post no
 run    ${equi} post no

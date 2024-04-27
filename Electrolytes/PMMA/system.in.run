@@ -9,11 +9,8 @@ edihed eimp ke pe temp press vol density cpu
 thermo_modify flush yes
 
 # Trajectory.
-#dump TRJ all dcd $d ${run}.dcd
-#dump_modify TRJ unwrap yes
-dump TRJ all atom 1000 dump.md.lammpstrj
-
-minimize 1.0e-4 1.0e-6 1000 10000
+dump TRJ all dcd $d ${run}.dcd
+dump_modify TRJ unwrap yes
 
 # Thermalisation and relaxation, NPT ensemble.
 timestep       ${ts}

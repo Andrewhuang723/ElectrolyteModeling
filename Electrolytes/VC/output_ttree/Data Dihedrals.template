@@ -1,0 +1,4 @@
+$/dihedral:bytype1 @/dihedral:OPLSAA/X_047_047_X $/atom:VC[0][0][0]/3 $/atom:VC[0][0][0]/2 $/atom:VC[0][0][0]/1 $/atom:VC[0][0][0]/6
+$/dihedral:bytype5 @/dihedral:OPLSAA/020_047_047_046 $/atom:VC[0][0][0]/3 $/atom:VC[0][0][0]/2 $/atom:VC[0][0][0]/1 $/atom:VC[0][0][0]/7
+$/dihedral:bytype6 @/dihedral:OPLSAA/020_047_047_046 $/atom:VC[0][0][0]/6 $/atom:VC[0][0][0]/1 $/atom:VC[0][0][0]/2 $/atom:VC[0][0][0]/8
+$/dihedral:bytype7 @/dihedral:OPLSAA/046_047_047_046 $/atom:VC[0][0][0]/7 $/atom:VC[0][0][0]/1 $/atom:VC[0][0][0]/2 $/atom:VC[0][0][0]/8

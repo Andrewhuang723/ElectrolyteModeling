@@ -6,9 +6,9 @@ import "/Users/andrewhuang/Desktop/moltemplate/moltemplate/force_fields/oplsaa.l
 PMMA = new PMMA[1]
 
 write_once("Data Boundary") {
-  -100 100 xlo xhi
-  -100 100 ylo yhi
-  -100 100 zlo zhi
+  -50 50 xlo xhi
+  -50 50 ylo yhi
+  -50 50 zlo zhi
 }
 
 # Create an input deck for LAMMPS.

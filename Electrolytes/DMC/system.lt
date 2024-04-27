@@ -1,13 +1,14 @@
-import "dmc.lt"
+import "DMC.lt"
 
-DMC = new DMC[1].move(8.0, 0, 0)
-             [1].move(0, 8.0, 0)
-             [1].move(0, 0, 8.0)
+DMC = new DMC[1].move(5.0, 0, 0)
+       [1].move(0, 5.0, 0)
+       [1].move(0, 0, 5.0)
+
 
 write_once("Data Boundary") {
-  -15 15 xlo xhi
-  -15 15 ylo yhi
-  -15 15 zlo zhi
+  -20 20 xlo xhi
+  -20 20 ylo yhi
+  -20 20 zlo zhi
 }
 
 # Create an input deck for LAMMPS.

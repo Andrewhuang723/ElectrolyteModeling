@@ -29,17 +29,19 @@ extra/special/per/atom 400
 # extra/improper/per/atom 1000 &
 # extra/special/per/atom 400
 
-
-
 ## parameters
 include ../../PARM_AFTER.lammps
 
-
 # Create PMMA molecules
-molecule pmmamol ../../PMMA/molecule.txt
-create_atoms 1 random 6 34125 NULL mol & 
-pmmamol 23415 overlap 1 maxtry 50
+molecule pmmamol ../../PMMA_50/molecule.txt
+create_atoms 1 random 3 12345 NULL mol & 
+pmmamol 23415 
+# overlap 1 maxtry 50
 
+# minimzation
+minimize 1.0e-4 1.0e-6 1000 100
+# fix mynpt all npt temp 300 300 100 x 1 1 1000
+# timestep 0.01
 
 ## Delete atoms to avoid high density
 

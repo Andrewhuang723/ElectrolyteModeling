@@ -1,0 +1,28 @@
+# VC.lt
+
+import /Users/andrewhuang/Desktop/moltemplate/moltemplate/force_fields/oplsaa.lt
+VC inherits OPLSAA {
+
+  write("Data Atoms") {
+      $atom:1    $mol:.  @atom:458      0.0     -0.7397460293936131 0.697925815149654 0.054469589613590996
+      $atom:2    $mol:.  @atom:458      0.0     -0.7573129852654578 -0.6805905659451282 -0.023757580601871126
+      $atom:3    $mol:.  @atom:714      0.0     0.4874982749034887 -1.0942417022174764 -0.07204957629292012
+      $atom:4    $mol:.  @atom:713      0.0     1.229975645195478 -0.014242412003582538 -0.02523038212076132
+      $atom:5    $mol:.  @atom:712      0.0     2.488164986542549 -0.028811591875907143 -0.051042942828267886
+      $atom:6    $mol:.  @atom:714      0.0     0.5152394231323116 1.0826304094615014 0.051482804907754316
+      $atom:7    $mol:.  @atom:89      0.0     -1.5948392081444887 1.3582047410744178 0.10907742536542064
+      $atom:8    $mol:.  @atom:89      0.0     -1.6289801069702667 -1.3208746936434654 -0.042949338042946615
+  }
+
+  write("Data Bond List") {
+      $bond:1  $atom:1   $atom:2
+      $bond:2  $atom:2   $atom:3
+      $bond:3  $atom:3   $atom:4
+      $bond:4  $atom:4   $atom:5
+      $bond:5  $atom:4   $atom:6
+      $bond:6  $atom:6   $atom:1
+      $bond:7  $atom:1   $atom:7
+      $bond:8  $atom:2   $atom:8
+  }
+
+}

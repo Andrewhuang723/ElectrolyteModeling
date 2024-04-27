@@ -18,9 +18,9 @@ PMMA inherits OPLSAA {
   # ---- Now, modify the ends: ---
   # Delete the MMA groups at the end of the chain, and replace it with MMA_end.
 
-  delete monomers[0]
+  #delete monomers[0]
 
-  monomers[0] = new MMA_end
+  #monomers[0] = new MMA_end
 
   delete monomers[49]
 
@@ -29,7 +29,7 @@ PMMA inherits OPLSAA {
 
   # Move the MMA_end group to the correct location at the end of the chain:
 
-  monomers[0].rot(180.0,0,0,1).move(1.2533223,0,0)
+  #monomers[0].rot(180.0,0,0,1).move(1.2533223,0,0)
   # Note: 11.2799007 = (10-1) * 1.2533223
 
   monomers[49].rot(180.0,0,0,1).move(61.4127927,0,0)

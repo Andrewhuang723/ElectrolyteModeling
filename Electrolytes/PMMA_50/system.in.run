@@ -12,7 +12,7 @@ thermo_modify flush yes
 dump TRJ all dcd $d ${run}.dcd
 dump_modify TRJ unwrap yes
 
-# minimization
+#minimization
 minimize 1.0e-4 1.0e-6 1000 100
 
 # Thermalisation and relaxation, NPT ensemble.
@@ -20,10 +20,10 @@ timestep       ${ts}
 fix             NPT all npt temp ${temp} ${temp} ${tcouple} iso $p $p ${pcouple}
 velocity all create ${temp} 858096 dist gaussian
 # Short runs to update the PPPM settings as the box shinks.
-run    ${equi} post no
-run    ${equi} post no
-run    ${equi} post no
+#run    ${equi} post no
+#run    ${equi} post no
+#run    ${equi} post no
 run    ${equi}
 # From now on, the density shouldn't change too much.
-run    ${prod}
+#run    ${prod}
 unfix NPT

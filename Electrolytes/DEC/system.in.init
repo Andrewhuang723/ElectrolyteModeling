@@ -18,7 +18,7 @@ variable temp   equal  300       # equilibrium temperature
 variable p      equal  1.        # equilibrium pressure
 variable d      equal  1000      # output frequency
 variable equi   equal  5000      # Equilibration steps
-variable prod   equal  30000     # Production steps
+variable prod   equal  100000     # Production steps
 
 # PBC (set them before the creation of the box).
 boundary p p p
