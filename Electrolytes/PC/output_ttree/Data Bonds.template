@@ -10,4 +10,4 @@ $/bond:PC[0][0][0]/9 @/bond:OPLSAA/013_046 $/atom:PC[0][0][0]/1 $/atom:PC[0][0][
 $/bond:PC[0][0][0]/10 @/bond:OPLSAA/013_046 $/atom:PC[0][0][0]/1 $/atom:PC[0][0][0]/10
 $/bond:PC[0][0][0]/11 @/bond:OPLSAA/013_046 $/atom:PC[0][0][0]/2 $/atom:PC[0][0][0]/11
 $/bond:PC[0][0][0]/12 @/bond:OPLSAA/013_046 $/atom:PC[0][0][0]/3 $/atom:PC[0][0][0]/12
-$/bond:PC[0][0][0]/13 @/bond:OPLSAA/013_024 $/atom:PC[0][0][0]/3 $/atom:PC[0][0][0]/13
+$/bond:PC[0][0][0]/13 @/bond:OPLSAA/013_046 $/atom:PC[0][0][0]/3 $/atom:PC[0][0][0]/13

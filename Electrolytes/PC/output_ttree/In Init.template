@@ -12,7 +12,7 @@
     special_bonds lj/coul 0.0 0.0 0.5
     kspace_style pppm 0.0001
  # Input variables.
- variable run    string pc   # output name
+ variable run    string ec   # output name
  variable ts     equal  1         # timestep
  variable temp   equal  300       # equilibrium temperature
  variable p      equal  1.        # equilibrium pressure
