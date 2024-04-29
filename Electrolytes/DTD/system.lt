@@ -6,9 +6,9 @@ DTD = new DTD[1].move(5.0, 0, 0)
 
 
 write_once("Data Boundary") {
-  -10 10 xlo xhi
-  -10 10 ylo yhi
-  -10 10 zlo zhi
+  -20 20 xlo xhi
+  -20 20 ylo yhi
+  -20 20 zlo zhi
 }
 
 # Create an input deck for LAMMPS.

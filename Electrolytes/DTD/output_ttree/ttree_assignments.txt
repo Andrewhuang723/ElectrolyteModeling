@@ -3106,3 +3106,78 @@
 @/improper:OPLSAA/X_X_047_X   4       #"/Users/andrewhuang/Desktop/moltemplate/moltemplate/force_fields/oplsaa.lt", line 8181
 @/improper:OPLSAA/X_X_048_X   5       #"/Users/andrewhuang/Desktop/moltemplate/moltemplate/force_fields/oplsaa.lt", line 8185
 @/improper:OPLSAA/055_055_X_055   6       #"/Users/andrewhuang/Desktop/moltemplate/moltemplate/force_fields/oplsaa.lt", line 8189
+$/atom:DTD[0][0][0]/1   1       #"DTD.lt", line 7
+$/atom:DTD[0][0][0]/2   2       #"DTD.lt", line 8
+$/atom:DTD[0][0][0]/3   3       #"DTD.lt", line 9
+$/atom:DTD[0][0][0]/4   4       #"DTD.lt", line 10
+$/atom:DTD[0][0][0]/5   5       #"DTD.lt", line 11
+$/atom:DTD[0][0][0]/6   6       #"DTD.lt", line 12
+$/atom:DTD[0][0][0]/7   7       #"DTD.lt", line 13
+$/atom:DTD[0][0][0]/8   8       #"DTD.lt", line 14
+$/atom:DTD[0][0][0]/9   9       #"DTD.lt", line 15
+$/atom:DTD[0][0][0]/10   10       #"DTD.lt", line 16
+$/atom:DTD[0][0][0]/11   11       #"DTD.lt", line 17
+$/mol:DTD[0][0][0]   1       #"DTD.lt", line 7
+$/bond:DTD[0][0][0]/1   1       #"DTD.lt", line 21
+$/bond:DTD[0][0][0]/2   2       #"DTD.lt", line 22
+$/bond:DTD[0][0][0]/3   3       #"DTD.lt", line 23
+$/bond:DTD[0][0][0]/4   4       #"DTD.lt", line 24
+$/bond:DTD[0][0][0]/5   5       #"DTD.lt", line 25
+$/bond:DTD[0][0][0]/6   6       #"DTD.lt", line 26
+$/bond:DTD[0][0][0]/7   7       #"DTD.lt", line 27
+$/bond:DTD[0][0][0]/8   8       #"DTD.lt", line 28
+$/bond:DTD[0][0][0]/9   9       #"DTD.lt", line 29
+$/bond:DTD[0][0][0]/10   10       #"DTD.lt", line 30
+$/bond:DTD[0][0][0]/11   11       #"DTD.lt", line 31
+$/angle:bytype1  1
+$/angle:bytype2  2
+$/angle:bytype3  3
+$/angle:bytype4  4
+$/angle:bytype5  5
+$/angle:bytype6  6
+$/angle:bytype7  7
+$/angle:bytype8  8
+$/angle:bytype9  9
+$/angle:bytype10  10
+$/angle:bytype11  11
+$/angle:bytype12  12
+$/angle:bytype13  13
+$/angle:bytype14  14
+$/angle:bytype15  15
+$/angle:bytype16  16
+$/angle:bytype17  17
+$/angle:bytype18  18
+$/angle:bytype19  19
+$/angle:bytype20  20
+$/dihedral:bytype1  1
+$/dihedral:bytype2  2
+$/dihedral:bytype3  3
+$/dihedral:bytype4  4
+$/dihedral:bytype5  5
+$/dihedral:bytype6  6
+$/dihedral:bytype7  7
+$/dihedral:bytype8  8
+$/dihedral:bytype9  9
+$/dihedral:bytype10  10
+$/dihedral:bytype11  11
+$/dihedral:bytype12  12
+$/dihedral:bytype13  13
+$/dihedral:bytype14  14
+$/dihedral:bytype15  15
+$/dihedral:bytype16  16
+$/dihedral:bytype17  17
+$/dihedral:bytype18  18
+$/dihedral:bytype19  19
+$/dihedral:bytype20  20
+$/dihedral:bytype21  21
+$/dihedral:bytype22  22
+$/dihedral:bytype23  23
+$/dihedral:bytype24  24
+$/dihedral:bytype25  25
+$/dihedral:bytype26  26
+$/dihedral:bytype27  27
+$/dihedral:bytype28  28
+$/dihedral:bytype29  29
+$/dihedral:bytype30  30
+$/dihedral:bytype31  31
+$/dihedral:bytype32  32
