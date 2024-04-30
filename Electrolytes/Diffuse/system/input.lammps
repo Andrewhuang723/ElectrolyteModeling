@@ -8,7 +8,7 @@ improper_style harmonic
 pair_style lj/cut/coul/long 11.0 11.0
 pair_modify mix geometric
 special_bonds lj/coul 0.0 0.0 0.5
-kspace_style pppm 1e-5
+kspace_style pppm 1e-3
 
 region box block -100 100 -100 100 -100 100
 create_box 906 box &
@@ -28,12 +28,12 @@ include ../../PARM_AFTER.lammps
 
 # Create EC molecules
 molecule ecmol ../../EC/molecule.txt
-create_atoms 0 random 230 12345 NULL mol &
+create_atoms 0 random 20 12345 NULL mol &
 ecmol 13245 overlap 1 maxtry 50
 
 # Create PC molecules
 molecule pcmol ../../PC/molecule.txt
-create_atoms 1 random 100 23451 NULL mol &
+create_atoms 1 random 10 23451 NULL mol &
 pcmol 24351 overlap 1 maxtry 50
 
 # Create EMC molecules
@@ -43,13 +43,33 @@ emcmol 35412 overlap 1 maxtry 50
 
 # Create EA molecules
 molecule eamol ../../EA/molecule.txt
-create_atoms 3 random 100 45123 NULL mol &
+create_atoms 3 random 10 45123 NULL mol &
 eamol 41523 overlap 1 maxtry 50
 
-# Read LiPF6
+# Create FEC molecules
+molecule fecmol ../../FEC/molecule.txt
+create_atoms 4 random 10 65432 NULL mol &
+fecmol 64532 overlap 1 maxtry 50
+
+# Create VC molecules
+molecule vcmol ../../VC/molecule.txt
+create_atoms 5 random 10 76543 NULL mol &
+vcmol 75643 overlap 1 maxtry 50
+
+# Create DTD molecules
+molecule dtdmol ../../DTD/molecule.txt
+create_atoms 6 random 10 67543 NULL mol &
+dtdmol 65743 overlap 1 maxtry 50
+
+# Create LiPF6 molecules
 molecule lipf6 ../../LiPF6/molecule.txt
-create_atoms 4 random 20 24582 NULL mol &
-lipf6 30493 overlap 1 maxtry 50
+create_atoms 7 random 20 51234 NULL mol &
+lipf6 52134 overlap 1 maxtry 50
+
+# Create LiFSI molecules
+molecule lifsi ../../LiFSI/molecule.txt
+create_atoms 8 random 20 12345 NULL mol &
+lifsi 13245 overlap 1 maxtry 50
 
 
 # minimzation

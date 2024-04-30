@@ -11,14 +11,41 @@ improper_style harmonic
 pair_style lj/cut/coul/long 11.0 11.0
 pair_modify mix geometric
 special_bonds lj/coul 0.0 0.0 0.5
-kspace_style pppm 1e-3
+kspace_style pppm 0.001
 
-region box block -100 100 -100 100 -100 100
-create_box 906 box bond/types 379 angle/types 1017 dihedral/types 800 improper/types 6 extra/bond/per/atom 1000 extra/angle/per/atom 1000 extra/dihedral/per/atom 1000 extra/improper/per/atom 1000 extra/special/per/atom 400
-Created orthogonal box = (-100 -100 -100) to (100 100 100)
+read_data ../system/system.data
+Reading data file ...
+  orthogonal box = (-100 -100 -100) to (100 100 100)
   1 by 2 by 2 MPI processor grid
-
-
+  reading atoms ...
+  5750 atoms
+  reading velocities ...
+  5750 velocities
+  scanning bonds ...
+  4 = max bonds/atom
+  scanning angles ...
+  6 = max angles/atom
+  scanning dihedrals ...
+  16 = max dihedrals/atom
+  scanning impropers ...
+  1 = max impropers/atom
+  reading bonds ...
+  5600 bonds
+  reading angles ...
+  9460 angles
+  reading dihedrals ...
+  12290 dihedrals
+  reading impropers ...
+  680 impropers
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        0        0.5     
+  special bond factors coul:  0        0        0.5     
+     4 = max # of 1-2 neighbors
+     7 = max # of 1-3 neighbors
+    12 = max # of 1-4 neighbors
+    13 = max # of special neighbors
+  special bonds CPU = 0.002 seconds
+  read_data CPU = 0.184 seconds
 
 include ../../PARM_AFTER.lammps
 mass 1 18.998
@@ -4069,152 +4096,21 @@ improper_coeff 6  10.5 180.0
 # improper_coeff @improper:X_102_103_103  10.5 180.0  ?
 # but I'd prefer to leave this out.
 
-# Create EC molecules
-molecule ecmol ../../EC/molecule.txt
-Read molecule template ecmol:
-  1 molecules
-  0 fragments
-  10 atoms with max type 5
-  10 bonds with max type 5
-  17 angles with max type 7
-  28 dihedrals with max type 11
-  1 impropers with max type 1
-create_atoms 0 random 20 12345 NULL mol ecmol 13245 overlap 1 maxtry 50
-Created 200 atoms
-  using lattice units in orthogonal box = (-100 -100 -100) to (100 100 100)
-  create_atoms CPU = 0.013 seconds
+fix mynve all nve/limit 0.1
+fix myber all temp/berendsen 1 1 100
+timestep 0.5
 
-# Create PC molecules
-molecule pcmol ../../PC/molecule.txt
-Read molecule template pcmol:
-  1 molecules
-  0 fragments
-  13 atoms with max type 720
-  13 bonds with max type 125
-  22 angles with max type 398
-  26 dihedrals with max type 799
-  2 impropers with max type 1
-create_atoms 1 random 10 23451 NULL mol pcmol 24351 overlap 1 maxtry 50
-Created 130 atoms
-  using lattice units in orthogonal box = (-100 -100 -100) to (100 100 100)
-  create_atoms CPU = 0.002 seconds
+dump mydmp all atom 1000 dump.lammpstrj
+thermo 200
 
-# Create EMC molecules
-molecule emcmol ../../EMC/molecule.txt
-Read molecule template emcmol:
-  1 molecules
-  0 fragments
-  15 atoms with max type 6
-  14 bonds with max type 6
-  23 angles with max type 9
-  25 dihedrals with max type 9
-  1 impropers with max type 1
-create_atoms 2 random 50 34512 NULL mol emcmol 35412 overlap 1 maxtry 50
-Created 750 atoms
-  using lattice units in orthogonal box = (-100 -100 -100) to (100 100 100)
-  create_atoms CPU = 0.009 seconds
-
-# Create EA molecules
-molecule eamol ../../EA/molecule.txt
-Read molecule template eamol:
-  1 molecules
-  0 fragments
-  14 atoms with max type 431
-  13 bonds with max type 125
-  22 angles with max type 398
-  20 dihedrals with max type 269
-  2 impropers with max type 1
-create_atoms 3 random 10 45123 NULL mol eamol 41523 overlap 1 maxtry 50
-Created 140 atoms
-  using lattice units in orthogonal box = (-100 -100 -100) to (100 100 100)
-  create_atoms CPU = 0.003 seconds
-
-# Create FEC molecules
-molecule fecmol ../../FEC/molecule.txt
-Read molecule template fecmol:
-  1 molecules
-  0 fragments
-  10 atoms with max type 788
-  10 bonds with max type 125
-  15 angles with max type 398
-  15 dihedrals with max type 269
-  2 impropers with max type 1
-create_atoms 4 random 10 65432 NULL mol fecmol 64532 overlap 1 maxtry 50
-Created 100 atoms
-  using lattice units in orthogonal box = (-100 -100 -100) to (100 100 100)
-  create_atoms CPU = 0.002 seconds
-
-# Create VC molecules
-molecule vcmol ../../VC/molecule.txt
-Read molecule template vcmol:
-  1 molecules
-  0 fragments
-  8 atoms with max type 714
-  8 bonds with max type 261
-  8 angles with max type 530
-  4 dihedrals with max type 536
-  8 impropers with max type 4
-create_atoms 5 random 10 76543 NULL mol vcmol 75643 overlap 1 maxtry 50
-Created 80 atoms
-  using lattice units in orthogonal box = (-100 -100 -100) to (100 100 100)
-  create_atoms CPU = 0.003 seconds
-
-# Create DTD molecules
-molecule dtdmol ../../DTD/molecule.txt
-Read molecule template dtdmol:
-  1 molecules
-  0 fragments
-  11 atoms with max type 431
-  11 bonds with max type 208
-  20 angles with max type 815
-  21 dihedrals with max type 358
-  0 impropers with max type 0
-create_atoms 6 random 10 67543 NULL mol dtdmol 65743 overlap 1 maxtry 50
-Created 110 atoms
-  using lattice units in orthogonal box = (-100 -100 -100) to (100 100 100)
-  create_atoms CPU = 0.004 seconds
-
-# Create LiPF6 molecules
-molecule lipf6 ../../LiPF6/molecule.txt
-Read molecule template lipf6:
-  1 molecules
-  0 fragments
-  8 atoms with max type 3
-  6 bonds with max type 1
-  15 angles with max type 2
-  0 dihedrals with max type 0
-  0 impropers with max type 0
-create_atoms 7 random 20 51234 NULL mol lipf6 52134 overlap 1 maxtry 50
-Created 160 atoms
-  using lattice units in orthogonal box = (-100 -100 -100) to (100 100 100)
-  create_atoms CPU = 0.001 seconds
-
-# Create LiFSI molecules
-molecule lifsi ../../LiFSI/molecule.txt
-Read molecule template lifsi:
-  1 molecules
-  0 fragments
-  10 atoms with max type 5
-  8 bonds with max type 3
-  13 angles with max type 5
-  6 dihedrals with max type 2
-  0 impropers with max type 0
-create_atoms 8 random 20 12345 NULL mol lifsi 13245 overlap 1 maxtry 50
-Created 200 atoms
-  using lattice units in orthogonal box = (-100 -100 -100) to (100 100 100)
-  create_atoms CPU = 0.002 seconds
-
-
-# minimzation
-minimize 1.0e-4 1.0e-6 1000 100
+run 4000
 PPPM initialization ...
-WARNING: System is not charge neutral, net charge = -60.9 (src/kspace.cpp:327)
   using 12-bit tables for long-range coulomb (src/kspace.cpp:342)
-  G vector (1/distance) = 0.088090019
+  G vector (1/distance) = 0.088090055
   grid = 15 15 15
   stencil order = 5
-  estimated absolute RMS force accuracy = 0.32218187
-  estimated relative force accuracy = 0.00097024115
+  estimated absolute RMS force accuracy = 0.33337572
+  estimated relative force accuracy = 0.0010039511
   using double precision FFTW3
   3d grid and FFT values/proc = 3380 960
 Generated 409965 of 409965 mixed pair_coeff terms from geometric mixing rule
@@ -4230,104 +4126,203 @@ Neighbor list info ...
       pair build: half/bin/newton
       stencil: half/bin/3d
       bin: standard
-Per MPI rank memory allocation (min/avg/max) = 1033 | 1033 | 1033 Mbytes
+Per MPI rank memory allocation (min/avg/max) = 14.96 | 14.98 | 14.99 Mbytes
    Step          Temp          E_pair         E_mol          TotEng         Press     
-         0   0              1.5653672e+08  80948.427      1.5661767e+08  5367123.3    
-        63   0              1921.4522      6911.9994      8833.4517     -14.543548    
-Loop time of 0.127194 on 4 procs for 63 steps with 1870 atoms
+         0   0              13579.235      30356.111      43935.346      3.6064943    
+       200   9.2303727      13538.975      30193.234      43890.387      2.8466278    
+       400   17.06074       13281.564      29981.596      43555.524     -9.3870155    
+       600   14.201969      13382.718      29748.79       43374.882     -9.0095075    
+       800   7.4899207      13496.663      29613.268      43238.283      10.932445    
+      1000   2.9174412      13505.847      29637.675      43193.517      3.9331765    
+      1200   3.6302793      13470.685      29616.083      43148.979      5.7023223    
+      1400   3.3936753      13403.151      29656.187      43117.494     -0.16033353   
+      1600   2.3914922      13364.323      29691.785      43097.09      -1.2939479    
+      1800   1.8312399      13352.572      29674.876      43058.829     -3.0689826    
+      2000   1.9186567      13336.229      29679.406      43048.514     -2.1134756    
+      2200   1.7936443      13342.089      29666.616      43039.443     -3.9438122    
+      2400   1.70188        13341.297      29651.298      43021.76      -1.4574625    
+      2600   1.8715145      13323.427      29643.656      42999.154     -1.1847582    
+      2800   1.7932698      13338.737      29621.656      42991.124      0.82851466   
+      3000   1.5846778      13326.254      29622.391      42975.801      2.0675708    
+      3200   1.5614353      13332.393      29625.963      42985.114      1.4674374    
+      3400   1.5383044      13307.512      29629.858      42963.731      0.45895664   
+      3600   1.6130904      13310.552      29638.476      42976.671     -0.61652635   
+      3800   1.481151       13285.196      29647.289      42957.867     -1.6503495    
+      4000   1.5233175      13279.552      29644.518      42950.175     -1.881393     
+Loop time of 9.37356 on 4 procs for 4000 steps with 5750 atoms
 
-88.5% CPU use with 4 MPI tasks x 1 OpenMP threads
-
-Minimization stats:
-  Stopping criterion = max force evaluations
-  Energy initial, next-to-last, final = 
-      156617671.732024   8871.19473871376   8833.45166291976
-  Force two-norm initial, final = 5.9291997e+08 589.81338
-  Force max component initial, final = 91864013 51.38522
-  Final line search alpha, max atom move = 0.00054289442 0.027896749
-  Iterations, force evaluations = 63 100
+Performance: 18.435 ns/day, 1.302 hours/ns, 426.732 timesteps/s, 2.454 Matom-step/s
+95.0% CPU use with 4 MPI tasks x 1 OpenMP threads
 
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg| %total
 ---------------------------------------------------------------
-Pair    | 0.0134     | 0.017924   | 0.021234   |   2.5 | 14.09
-Bond    | 0.016446   | 0.02376    | 0.03389    |   4.4 | 18.68
-Kspace  | 0.064814   | 0.077372   | 0.089231   |   3.5 | 60.83
-Neigh   | 0.0019437  | 0.0019457  | 0.001948   |   0.0 |  1.53
-Comm    | 0.0023872  | 0.002928   | 0.0031824  |   0.6 |  2.30
-Output  | 0          | 0          | 0          |   0.0 |  0.00
-Modify  | 0          | 0          | 0          |   0.0 |  0.00
-Other   |            | 0.003264   |            |       |  2.57
+Pair    | 1.1594     | 1.4598     | 1.6729     |  15.5 | 15.57
+Bond    | 2.4162     | 2.738      | 3.0672     |  14.1 | 29.21
+Kspace  | 4.0515     | 4.4663     | 4.8244     |  13.1 | 47.65
+Neigh   | 0.010146   | 0.010187   | 0.010222   |   0.0 |  0.11
+Comm    | 0.35028    | 0.47806    | 0.73999    |  22.2 |  5.10
+Output  | 0.0078788  | 0.0086986  | 0.0095806  |   0.7 |  0.09
+Modify  | 0.14405    | 0.14773    | 0.15358    |   1.0 |  1.58
+Other   |            | 0.06478    |            |       |  0.69
 
-Nlocal:          467.5 ave         594 max         379 min
-Histogram: 1 0 1 1 0 0 0 0 0 1
-Nghost:          358.5 ave         406 max         307 min
+Nlocal:         1437.5 ave        1609 max        1253 min
 Histogram: 1 0 0 0 1 1 0 0 0 1
-Neighs:        2969.25 ave        3798 max        2216 min
-Histogram: 1 0 0 1 0 1 0 0 0 1
+Nghost:        1047.75 ave        1090 max         963 min
+Histogram: 1 0 0 0 0 0 1 0 0 2
+Neighs:          12408 ave       14280 max        9499 min
+Histogram: 1 0 0 0 0 0 1 1 0 1
 
-Total # of neighbors = 11877
-Ave neighs/atom = 6.3513369
-Ave special neighs/atom = 7.3368984
-Neighbor list builds = 3
+Total # of neighbors = 49632
+Ave neighs/atom = 8.6316522
+Ave special neighs/atom = 8.2191304
+Neighbor list builds = 10
 Dangerous builds = 0
 
-## Run
-run 0
-WARNING: No fixes with time integration, atoms won't move (src/verlet.cpp:60)
+fix myber all temp/berendsen 300 300 100
+timestep 1.0
+
+run 4000
 PPPM initialization ...
   using 12-bit tables for long-range coulomb (src/kspace.cpp:342)
-  G vector (1/distance) = 0.088090019
+  G vector (1/distance) = 0.088090055
   grid = 15 15 15
   stencil order = 5
-  estimated absolute RMS force accuracy = 0.32218187
-  estimated relative force accuracy = 0.00097024115
+  estimated absolute RMS force accuracy = 0.33337572
+  estimated relative force accuracy = 0.0010039511
   using double precision FFTW3
   3d grid and FFT values/proc = 3380 960
 Generated 409965 of 409965 mixed pair_coeff terms from geometric mixing rule
-Per MPI rank memory allocation (min/avg/max) = 1032 | 1032 | 1032 Mbytes
+Per MPI rank memory allocation (min/avg/max) = 16.02 | 16.04 | 16.05 Mbytes
    Step          Temp          E_pair         E_mol          TotEng         Press     
-        63   0              1921.4522      6911.9994      8833.4517     -14.543548    
-Loop time of 1.86475e-06 on 4 procs for 0 steps with 1870 atoms
+      4000   1.5233175      13279.552      29644.518      42950.175     -1.881393     
+      4200   246.36747      13289.312      30265.113      47776.345      9.9726096    
+      4400   284.17095      13288.118      30497.483      48655.347      9.9087853    
+      4600   291.43834      13378.765      30527.962      48901.012      11.886485    
+      4800   300.00375      13327.561      30488.748      48957.377      9.4053232    
+      5000   301.35086      13230.766      30591.865      48986.784     -2.9071026    
+      5200   299.23618      13290.579      30573.565      48992.058      8.20667      
+      5400   299.28905      13342.192      30568.106      49039.118      3.5075377    
+      5600   297.36184      13283.223      30669.941      49048.957      8.0517463    
+      5800   298.85289      13346.016      30582.812      49050.173      11.214942    
+      6000   297.40244      13215.811      30726.832      49039.132     -1.5198322    
+      6200   298.82477      13228.809      30713.238      49062.911      0.98492838   
+      6400   297.61162      13344.634      30621.695      49066.403      13.305287    
+      6600   298.47484      13267.611      30699.95       49082.428      3.9993288    
+      6800   297.34925      13351.974      30636.026      49083.577      14.782834    
+      7000   297.37083      13247.282      30746.792      49090.021      5.258485     
+      7200   302.16574      13259.699      30669.531      49107.346      9.7049814    
+      7400   301.23153      13278.388      30644.799      49085.295      14.567728    
+      7600   297.90673      13285.694      30739.077      49129.902      14.774881    
+      7800   300.90323      13267.789      30743.21       49167.48       12.777294    
+      8000   303.3859       13307.375      30654.785      49161.186      9.5203161    
+Loop time of 9.56425 on 4 procs for 4000 steps with 5750 atoms
 
-107.3% CPU use with 4 MPI tasks x 1 OpenMP threads
+Performance: 36.135 ns/day, 0.664 hours/ns, 418.224 timesteps/s, 2.405 Matom-step/s
+96.8% CPU use with 4 MPI tasks x 1 OpenMP threads
 
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg| %total
 ---------------------------------------------------------------
-Pair    | 0          | 0          | 0          |   0.0 |  0.00
-Bond    | 0          | 0          | 0          |   0.0 |  0.00
-Kspace  | 0          | 0          | 0          |   0.0 |  0.00
-Neigh   | 0          | 0          | 0          |   0.0 |  0.00
-Comm    | 0          | 0          | 0          |   0.0 |  0.00
-Output  | 0          | 0          | 0          |   0.0 |  0.00
-Modify  | 0          | 0          | 0          |   0.0 |  0.00
-Other   |            | 1.865e-06  |            |       |100.00
+Pair    | 1.2354     | 1.466      | 1.6205     |  11.9 | 15.33
+Bond    | 2.6041     | 2.8674     | 3.1109     |  10.6 | 29.98
+Kspace  | 3.9712     | 4.2789     | 4.5726     |  10.4 | 44.74
+Neigh   | 0.2686     | 0.26871    | 0.26882    |   0.0 |  2.81
+Comm    | 0.37064    | 0.46055    | 0.6604     |  17.1 |  4.82
+Output  | 0.0067585  | 0.0070718  | 0.0074865  |   0.3 |  0.07
+Modify  | 0.14319    | 0.14735    | 0.15184    |   0.9 |  1.54
+Other   |            | 0.06826    |            |       |  0.71
 
-Nlocal:          467.5 ave         594 max         379 min
-Histogram: 1 0 1 1 0 0 0 0 0 1
-Nghost:          358.5 ave         406 max         307 min
-Histogram: 1 0 0 0 1 1 0 0 0 1
-Neighs:        2969.25 ave        3798 max        2216 min
-Histogram: 1 0 0 1 0 1 0 0 0 1
+Nlocal:         1437.5 ave        1520 max        1338 min
+Histogram: 1 0 0 0 0 1 1 0 0 1
+Nghost:        1063.25 ave        1081 max        1045 min
+Histogram: 1 0 0 0 0 2 0 0 0 1
+Neighs:        11280.5 ave       11789 max       10252 min
+Histogram: 1 0 0 0 0 0 0 1 1 1
 
-Total # of neighbors = 11877
-Ave neighs/atom = 6.3513369
-Ave special neighs/atom = 7.3368984
-Neighbor list builds = 0
+Total # of neighbors = 45122
+Ave neighs/atom = 7.8473043
+Ave special neighs/atom = 8.2191304
+Neighbor list builds = 239
 Dangerous builds = 0
+
+unfix mynve
+fix mynve all nve
+
+run 4000
+PPPM initialization ...
+  using 12-bit tables for long-range coulomb (src/kspace.cpp:342)
+  G vector (1/distance) = 0.088090055
+  grid = 15 15 15
+  stencil order = 5
+  estimated absolute RMS force accuracy = 0.33337572
+  estimated relative force accuracy = 0.0010039511
+  using double precision FFTW3
+  3d grid and FFT values/proc = 3380 960
+Generated 409965 of 409965 mixed pair_coeff terms from geometric mixing rule
+Per MPI rank memory allocation (min/avg/max) = 16.02 | 16.04 | 16.05 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press     
+      8000   303.3859       13307.375      30654.785      49161.186      9.5203161    
+      8200   330.51053      13214.752      31266.706      50145.31       7.2181594    
+      8400   288.66754      13251.208      32736.007      50934.018     -1.8629482    
+      8600   364.75169      13379.271      32741.542      52371.444      6.4589112    
+      8800   457.12952      13338.448      33342.678      54514.807      17.787543    
+      9000   402.87591      13432.994      33385.459      53722.407      17.816601    
+      9200   299.90635      13315.897      33494.425      51949.72       1.3555061    
+      9400   248.90621      13338.71       36266.862      53870.998     -16.998959    
+      9600   327.87789      13411.224      34435.023      53464.985     -0.51838299   
+      9800   225.38966      13324.194      35168.553      52355.177     -13.768501    
+     10000   347.36482      13252.408      34633.988      53839.074     -1.1902694    
+     10200   228.28526      13285.885      39086.593      56284.529     -35.705297    
+     10400   316.03716      13253.093      36362.298      55031.217     -10.413393    
+     10600   248.14614      13269.569      37221.298      54743.267     -22.202448    
+     10800   362.4667       13232.569      34225.023      53669.067      3.3900245    
+     11000   311.03414      13193.682      36209.621      54733.395     -12.30486     
+     11200   543.18642      13156.017      40696.317      63160.744     -30.335332    
+     11400   413.14085      13158.406      35729.297      55967.565     -4.8016164    
+     11600   322.82783      13225.639      35171.492      53929.328     -4.9745742    
+     11800   347.94282      13210.192      35226.664      54399.44       0.56391582   
+     12000   473.64868      13145.324      35020.554      56282.643      10.545896    
+Loop time of 15.2311 on 4 procs for 4000 steps with 5750 atoms
+
+Performance: 22.690 ns/day, 1.058 hours/ns, 262.620 timesteps/s, 1.510 Matom-step/s
+95.7% CPU use with 4 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 1.6541     | 1.7775     | 1.8838     |   6.2 | 11.67
+Bond    | 3.0936     | 3.3043     | 3.4752     |   7.9 | 21.69
+Kspace  | 4.6389     | 4.8524     | 5.0381     |   6.4 | 31.86
+Neigh   | 4.1108     | 4.1145     | 4.1189     |   0.1 | 27.01
+Comm    | 0.71267    | 0.82056    | 0.96803    |  10.7 |  5.39
+Output  | 0.0072312  | 0.007585   | 0.0080602  |   0.4 |  0.05
+Modify  | 0.18778    | 0.19086    | 0.19382    |   0.6 |  1.25
+Other   |            | 0.1635     |            |       |  1.07
+
+Nlocal:         1437.5 ave        1527 max        1342 min
+Histogram: 1 0 0 0 0 2 0 0 0 1
+Nghost:        1082.25 ave        1119 max        1007 min
+Histogram: 1 0 0 0 0 0 0 1 1 1
+Neighs:          11542 ave       12412 max       10587 min
+Histogram: 1 0 0 0 1 1 0 0 0 1
+
+Total # of neighbors = 46168
+Ave neighs/atom = 8.0292174
+Ave special neighs/atom = 8.2191304
+Neighbor list builds = 3169
+Dangerous builds = 2507
 
 write_data system.data
 System init for write_data ...
 PPPM initialization ...
   using 12-bit tables for long-range coulomb (src/kspace.cpp:342)
-  G vector (1/distance) = 0.088090019
+  G vector (1/distance) = 0.088090055
   grid = 15 15 15
   stencil order = 5
-  estimated absolute RMS force accuracy = 0.32218187
-  estimated relative force accuracy = 0.00097024115
+  estimated absolute RMS force accuracy = 0.33337572
+  estimated relative force accuracy = 0.0010039511
   using double precision FFTW3
   3d grid and FFT values/proc = 3380 960
 Generated 409965 of 409965 mixed pair_coeff terms from geometric mixing rule
-write_dump all atom dump.lammpstrj
-Total wall time: 0:00:00
+Total wall time: 0:00:35
