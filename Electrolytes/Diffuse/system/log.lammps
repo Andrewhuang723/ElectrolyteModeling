@@ -14,7 +14,7 @@ special_bonds lj/coul 0.0 0.0 0.5
 kspace_style pppm 1e-3
 
 region box block -100 100 -100 100 -100 100
-create_box 906 box bond/types 379 angle/types 1017 dihedral/types 800 improper/types 6 extra/bond/per/atom 1000 extra/angle/per/atom 1000 extra/dihedral/per/atom 1000 extra/improper/per/atom 1000 extra/special/per/atom 400
+create_box 909 box bond/types 388 angle/types 1030 dihedral/types 811 improper/types 6 extra/bond/per/atom 1000 extra/angle/per/atom 2000 extra/dihedral/per/atom 1000 extra/improper/per/atom 1000 extra/special/per/atom 400
 Created orthogonal box = (-100 -100 -100) to (100 100 100)
   1 by 2 by 2 MPI processor grid
 
@@ -927,6 +927,16 @@ mass 903 12.011
 mass 904 12.011
 mass 905 15.999
 mass 906 12.011
+# mass 907 30.970 # LiPF6 P
+# mass 908 19.000 # LiPF6 F
+# mass 909 6.940 # LiPF6 Li
+mass 907 18.9984 # LiFSI F
+# mass 911 6.941 # LiFSI Li
+# mass 912 14.0067 # LiFSI N
+# mass 913 15.9994 # LiFSI O
+# mass 914 32.065 # LiFSI S
+mass 908 10.811 # LiDFOB B
+mass 909 18.9984 # LiDFOB F
 
 pair_coeff 1 1  0.061 2.94
 pair_coeff 2 2  0.118 3.905
@@ -1834,6 +1844,17 @@ pair_coeff 903 903  0.086 3.3
 pair_coeff 904 904  0.086 3.3
 pair_coeff 905 905  0.21 2.96
 pair_coeff 906 906  0.066 3.5
+# pair_coeff 907 907 0.2000000 3.740 # P # JPCB 2004, 2038
+# pair_coeff 908 908 0.0610000 3.118 # F # JPCB 2004, 2038
+# pair_coeff 909 909 0.0005000 2.870 # Li # JCTC 2006
+pair_coeff 907 907 0.222 2.95 # F JBCB 2010 114 3592–3600
+# pair_coeff 911 911 0.0005000 2.870 # Li # JCTC 2006
+# pair_coeff 912 912 0.17 3.25 # N # oplsaa #421 sulfonamide
+# pair_coeff 913 913 0.17 2.96 # O # oplsaa #416 sulfonamide
+# pair_coeff 914 914 0.25 3.55 # S # oplsaa #415 sulfonamide
+pair_coeff 908 908 0.095 3.5814 # B https://pubs.acs.org/doi/10.1021/ct900009a
+pair_coeff 909 909 0.0610000 3.118 # F # JPCB 2004, 2038
+
 bond_coeff 1  367.0 1.38
 bond_coeff 2  420.0 1.357
 bond_coeff 3  367.0 1.36
@@ -2213,6 +2234,17 @@ bond_coeff 376  260.0 1.52
 bond_coeff 377  550.0 1.225
 bond_coeff 378  94.0 2.32
 bond_coeff 379  549.0 1.345
+bond_coeff 380  370.4589 1.606 # LiPF6 P-F JPCB 2004, 16893
+bond_coeff 381  1879.0 1.575 # LiFSI S-F JBCB 2010 114 3592–3600
+bond_coeff 382  434.0 1.67 # LiFSI S-N
+bond_coeff 383  700.0 1.44 # LiFSI S-O
+bond_coeff 384  350.0 1.51 # LiDFOB C-C
+bond_coeff 385  1879.0 1.575 # LiDFOB  F-B
+bond_coeff 386  1879.0 1.575 # LiDFOB O-B
+bond_coeff 387  450.0 1.364 # LiDFOB O-C
+bond_coeff 388  570.0 1.229 # LiDFOB O=C
+
+
 angle_coeff 1  33.0 109.47
 angle_coeff 2  50.0 109.5
 angle_coeff 3  63.0 112.4
@@ -3230,6 +3262,20 @@ angle_coeff 1014  70.0 124.0
 angle_coeff 1015  85.0 117.0
 angle_coeff 1016  160.0 180.0
 angle_coeff 1017  160.0 180.0
+angle_coeff 1018  139.2209 90.00 # JPCB 2004, 16893
+angle_coeff 1019  34.77535 180.00 # JPCB 2004, 16893
+angle_coeff 1020  902.00 103.00 # LiFSI F-S-N JBCB 2010 114 3592–3600
+angle_coeff 1021  1077.00 104.10 # LiFSI F-S-O JBCB 2010 114 3592–3600
+angle_coeff 1022  1 1# LiFSI O-S-N args
+angle_coeff 1023  1 1# LiFSI O-S-O
+angle_coeff 1024  1 1# LiFSI S-N-S
+angle_coeff 1025 1 1 # LiDFOB C-O-B
+angle_coeff 1026 1 1 # LiDFOB F-B-F
+angle_coeff 1027 1 1 # LiDFOB F-B-O
+angle_coeff 1028 1 1 # LiDFOB O-B-O
+angle_coeff 1029 1 1 # LiDFOB O-C-C
+angle_coeff 1030 1 1 # LiDFOB O-C-O
+
 dihedral_coeff 1  -2.5 1.25 3.1 0.0
 dihedral_coeff 2  -2.5 1.25 3.1 0.0
 dihedral_coeff 3  -2.0 0.7 3.0 0.0
@@ -4030,6 +4076,17 @@ dihedral_coeff 797  0.0 5.0 0.0 0.0
 dihedral_coeff 798  0.0 10.75 0.0 0.0
 dihedral_coeff 799  1.3 -0.05 0.2 0.0
 dihedral_coeff 800  1.3 -0.05 0.2 0.0
+dihedral_coeff 801  11.446 -15.186 -3.212 0.00 # LiFSI S-N-S-F JBCB 2010 114 3592–3600
+dihedral_coeff 802  0 0 -0.015 0.00 # LiFSI S-N-S-O JBCB 2010 114 3592–3600
+dihedral_coeff 803 1 1 1 0.00 # LiDFOB C-C-O-B
+dihedral_coeff 804 1 1 1 0.00 # LiDFOB C-O-C-B
+dihedral_coeff 805 1 1 1 0.00 # LiDFOB F-B-O-C
+dihedral_coeff 806 1 1 1 0.00 # LiDFOB F-O-B-C
+dihedral_coeff 807 1 1 1 0.00 # LiDFOB O-B-O-C
+dihedral_coeff 808 1 1 1 0.00 # LiDFOB O-C-C-B
+dihedral_coeff 809 1 1 1 0.00 # LiDFOB O-C-O-B
+dihedral_coeff 810 1 1 1 0.00 # LiDFOB O-O-B-C
+dihedral_coeff 811 1 1 1 0.00 # LiDFOB O-O-C-B
 # The following force field parameters were converted from
 # the tinker parameter file (oplsaa.prm) and then edited by hand:
 # Thanks to David Huang (adelaide.edu.au) for the corrections:
@@ -4082,7 +4139,7 @@ Read molecule template ecmol:
 create_atoms 0 random 20 12345 NULL mol ecmol 13245 overlap 1 maxtry 50
 Created 200 atoms
   using lattice units in orthogonal box = (-100 -100 -100) to (100 100 100)
-  create_atoms CPU = 0.013 seconds
+  create_atoms CPU = 0.012 seconds
 
 # Create PC molecules
 molecule pcmol ../../PC/molecule.txt
@@ -4094,7 +4151,7 @@ Read molecule template pcmol:
   22 angles with max type 398
   26 dihedrals with max type 799
   2 impropers with max type 1
-create_atoms 1 random 10 23451 NULL mol pcmol 24351 overlap 1 maxtry 50
+create_atoms 0 random 10 23451 NULL mol pcmol 24351 overlap 1 maxtry 50
 Created 130 atoms
   using lattice units in orthogonal box = (-100 -100 -100) to (100 100 100)
   create_atoms CPU = 0.002 seconds
@@ -4104,15 +4161,15 @@ molecule emcmol ../../EMC/molecule.txt
 Read molecule template emcmol:
   1 molecules
   0 fragments
-  15 atoms with max type 6
-  14 bonds with max type 6
-  23 angles with max type 9
-  25 dihedrals with max type 9
-  1 impropers with max type 1
-create_atoms 2 random 50 34512 NULL mol emcmol 35412 overlap 1 maxtry 50
+  15 atoms with max type 720
+  14 bonds with max type 125
+  22 angles with max type 398
+  17 dihedrals with max type 269
+  2 impropers with max type 1
+create_atoms 0 random 50 34512 NULL mol emcmol 35412 overlap 1 maxtry 50
 Created 750 atoms
   using lattice units in orthogonal box = (-100 -100 -100) to (100 100 100)
-  create_atoms CPU = 0.009 seconds
+  create_atoms CPU = 0.027 seconds
 
 # Create EA molecules
 molecule eamol ../../EA/molecule.txt
@@ -4124,10 +4181,10 @@ Read molecule template eamol:
   22 angles with max type 398
   20 dihedrals with max type 269
   2 impropers with max type 1
-create_atoms 3 random 10 45123 NULL mol eamol 41523 overlap 1 maxtry 50
+create_atoms 0 random 10 45123 NULL mol eamol 41523 overlap 1 maxtry 50
 Created 140 atoms
   using lattice units in orthogonal box = (-100 -100 -100) to (100 100 100)
-  create_atoms CPU = 0.003 seconds
+  create_atoms CPU = 0.002 seconds
 
 # Create FEC molecules
 molecule fecmol ../../FEC/molecule.txt
@@ -4139,10 +4196,10 @@ Read molecule template fecmol:
   15 angles with max type 398
   15 dihedrals with max type 269
   2 impropers with max type 1
-create_atoms 4 random 10 65432 NULL mol fecmol 64532 overlap 1 maxtry 50
+create_atoms 0 random 10 65432 NULL mol fecmol 64532 overlap 1 maxtry 50
 Created 100 atoms
   using lattice units in orthogonal box = (-100 -100 -100) to (100 100 100)
-  create_atoms CPU = 0.002 seconds
+  create_atoms CPU = 0.004 seconds
 
 # Create VC molecules
 molecule vcmol ../../VC/molecule.txt
@@ -4154,10 +4211,10 @@ Read molecule template vcmol:
   8 angles with max type 530
   4 dihedrals with max type 536
   8 impropers with max type 4
-create_atoms 5 random 10 76543 NULL mol vcmol 75643 overlap 1 maxtry 50
+create_atoms 0 random 10 76543 NULL mol vcmol 75643 overlap 1 maxtry 50
 Created 80 atoms
   using lattice units in orthogonal box = (-100 -100 -100) to (100 100 100)
-  create_atoms CPU = 0.003 seconds
+  create_atoms CPU = 0.005 seconds
 
 # Create DTD molecules
 molecule dtdmol ../../DTD/molecule.txt
@@ -4169,55 +4226,37 @@ Read molecule template dtdmol:
   20 angles with max type 815
   21 dihedrals with max type 358
   0 impropers with max type 0
-create_atoms 6 random 10 67543 NULL mol dtdmol 65743 overlap 1 maxtry 50
+create_atoms 0 random 10 67543 NULL mol dtdmol 65743 overlap 1 maxtry 50
 Created 110 atoms
   using lattice units in orthogonal box = (-100 -100 -100) to (100 100 100)
-  create_atoms CPU = 0.004 seconds
-
-# Create LiPF6 molecules
-molecule lipf6 ../../LiPF6/molecule.txt
-Read molecule template lipf6:
-  1 molecules
-  0 fragments
-  8 atoms with max type 3
-  6 bonds with max type 1
-  15 angles with max type 2
-  0 dihedrals with max type 0
-  0 impropers with max type 0
-create_atoms 7 random 20 51234 NULL mol lipf6 52134 overlap 1 maxtry 50
-Created 160 atoms
-  using lattice units in orthogonal box = (-100 -100 -100) to (100 100 100)
-  create_atoms CPU = 0.001 seconds
-
-# Create LiFSI molecules
-molecule lifsi ../../LiFSI/molecule.txt
-Read molecule template lifsi:
-  1 molecules
-  0 fragments
-  10 atoms with max type 5
-  8 bonds with max type 3
-  13 angles with max type 5
-  6 dihedrals with max type 2
-  0 impropers with max type 0
-create_atoms 8 random 20 12345 NULL mol lifsi 13245 overlap 1 maxtry 50
-Created 200 atoms
-  using lattice units in orthogonal box = (-100 -100 -100) to (100 100 100)
   create_atoms CPU = 0.002 seconds
+
+# # Create LiPF6 molecules
+# molecule lipf6 ../../LiPF6/molecule.txt
+# create_atoms 0 random 20 51234 NULL mol # lipf6 52134 overlap 1 maxtry 50
+
+# # Create LiFSI molecules
+# molecule lifsi ../../LiFSI/molecule.txt
+# create_atoms 0 random 20 12345 NULL mol # lifsi 13245 overlap 1 maxtry 50
+
+# # Create LiDFOB molecules
+# molecule lidfob ../../LiDFOB/molecule.txt
+# create_atoms 0 random 20 12345 NULL mol # lidfob 13245 overlap 1 maxtry 50
 
 
 # minimzation
 minimize 1.0e-4 1.0e-6 1000 100
 PPPM initialization ...
-WARNING: System is not charge neutral, net charge = -60.9 (src/kspace.cpp:327)
+WARNING: System is not charge neutral, net charge = -0.8 (src/kspace.cpp:327)
   using 12-bit tables for long-range coulomb (src/kspace.cpp:342)
-  G vector (1/distance) = 0.088090019
-  grid = 15 15 15
+  G vector (1/distance) = 0.021201477
+  grid = 3 3 3
   stencil order = 5
-  estimated absolute RMS force accuracy = 0.32218187
-  estimated relative force accuracy = 0.00097024115
+  estimated absolute RMS force accuracy = 0.45134848
+  estimated relative force accuracy = 0.0013592225
   using double precision FFTW3
-  3d grid and FFT values/proc = 3380 960
-Generated 409965 of 409965 mixed pair_coeff terms from geometric mixing rule
+  3d grid and FFT values/proc = 392 12
+Generated 412686 of 412686 mixed pair_coeff terms from geometric mixing rule
 Neighbor list info ...
   update: every = 1 steps, delay = 0 steps, check = yes
   max neighbors/atom: 2000, page size: 100000
@@ -4230,46 +4269,46 @@ Neighbor list info ...
       pair build: half/bin/newton
       stencil: half/bin/3d
       bin: standard
-Per MPI rank memory allocation (min/avg/max) = 1033 | 1033 | 1033 Mbytes
+Per MPI rank memory allocation (min/avg/max) = 1283 | 1283 | 1283 Mbytes
    Step          Temp          E_pair         E_mol          TotEng         Press     
-         0   0              1.5653672e+08  80948.427      1.5661767e+08  5367123.3    
-        63   0              1921.4522      6911.9994      8833.4517     -14.543548    
-Loop time of 0.127194 on 4 procs for 63 steps with 1870 atoms
+         0   0             -1228.4841      18055.083      16826.599     -162.69136    
+        53   0              83.894906      2711.7931      2795.688       0.73496285   
+Loop time of 0.0652053 on 4 procs for 53 steps with 1510 atoms
 
-88.5% CPU use with 4 MPI tasks x 1 OpenMP threads
+97.2% CPU use with 4 MPI tasks x 1 OpenMP threads
 
 Minimization stats:
   Stopping criterion = max force evaluations
   Energy initial, next-to-last, final = 
-      156617671.732024   8871.19473871376   8833.45166291976
-  Force two-norm initial, final = 5.9291997e+08 589.81338
-  Force max component initial, final = 91864013 51.38522
-  Final line search alpha, max atom move = 0.00054289442 0.027896749
-  Iterations, force evaluations = 63 100
+      16826.5990735022   2796.64191601134   2795.68796117753
+  Force two-norm initial, final = 5036.3084 47.488595
+  Force max component initial, final = 466.96621 7.2512818
+  Final line search alpha, max atom move = 0.0037067333 0.026878568
+  Iterations, force evaluations = 53 100
 
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg| %total
 ---------------------------------------------------------------
-Pair    | 0.0134     | 0.017924   | 0.021234   |   2.5 | 14.09
-Bond    | 0.016446   | 0.02376    | 0.03389    |   4.4 | 18.68
-Kspace  | 0.064814   | 0.077372   | 0.089231   |   3.5 | 60.83
-Neigh   | 0.0019437  | 0.0019457  | 0.001948   |   0.0 |  1.53
-Comm    | 0.0023872  | 0.002928   | 0.0031824  |   0.6 |  2.30
+Pair    | 0.0095254  | 0.012239   | 0.014843   |   1.7 | 18.77
+Bond    | 0.012649   | 0.015367   | 0.019792   |   2.2 | 23.57
+Kspace  | 0.026441   | 0.033553   | 0.039059   |   2.5 | 51.46
+Neigh   | 0.00037894 | 0.00038029 | 0.00038187 |   0.0 |  0.58
+Comm    | 0.0011953  | 0.0012835  | 0.0013671  |   0.2 |  1.97
 Output  | 0          | 0          | 0          |   0.0 |  0.00
 Modify  | 0          | 0          | 0          |   0.0 |  0.00
-Other   |            | 0.003264   |            |       |  2.57
+Other   |            | 0.002382   |            |       |  3.65
 
-Nlocal:          467.5 ave         594 max         379 min
+Nlocal:          377.5 ave         490 max         303 min
 Histogram: 1 0 1 1 0 0 0 0 0 1
-Nghost:          358.5 ave         406 max         307 min
-Histogram: 1 0 0 0 1 1 0 0 0 1
-Neighs:        2969.25 ave        3798 max        2216 min
-Histogram: 1 0 0 1 0 1 0 0 0 1
+Nghost:          287.5 ave         319 max         251 min
+Histogram: 1 0 0 1 0 0 0 1 0 1
+Neighs:           2401 ave        3001 max        1810 min
+Histogram: 1 0 0 0 2 0 0 0 0 1
 
-Total # of neighbors = 11877
-Ave neighs/atom = 6.3513369
-Ave special neighs/atom = 7.3368984
-Neighbor list builds = 3
+Total # of neighbors = 9604
+Ave neighs/atom = 6.3602649
+Ave special neighs/atom = 7.8145695
+Neighbor list builds = 1
 Dangerous builds = 0
 
 ## Run
@@ -4277,20 +4316,20 @@ run 0
 WARNING: No fixes with time integration, atoms won't move (src/verlet.cpp:60)
 PPPM initialization ...
   using 12-bit tables for long-range coulomb (src/kspace.cpp:342)
-  G vector (1/distance) = 0.088090019
-  grid = 15 15 15
+  G vector (1/distance) = 0.021201477
+  grid = 3 3 3
   stencil order = 5
-  estimated absolute RMS force accuracy = 0.32218187
-  estimated relative force accuracy = 0.00097024115
+  estimated absolute RMS force accuracy = 0.45134848
+  estimated relative force accuracy = 0.0013592225
   using double precision FFTW3
-  3d grid and FFT values/proc = 3380 960
-Generated 409965 of 409965 mixed pair_coeff terms from geometric mixing rule
-Per MPI rank memory allocation (min/avg/max) = 1032 | 1032 | 1032 Mbytes
+  3d grid and FFT values/proc = 392 12
+Generated 412686 of 412686 mixed pair_coeff terms from geometric mixing rule
+Per MPI rank memory allocation (min/avg/max) = 1281 | 1282 | 1282 Mbytes
    Step          Temp          E_pair         E_mol          TotEng         Press     
-        63   0              1921.4522      6911.9994      8833.4517     -14.543548    
-Loop time of 1.86475e-06 on 4 procs for 0 steps with 1870 atoms
+        53   0              83.894906      2711.7931      2795.688       0.73496285   
+Loop time of 2.4505e-06 on 4 procs for 0 steps with 1510 atoms
 
-107.3% CPU use with 4 MPI tasks x 1 OpenMP threads
+102.0% CPU use with 4 MPI tasks x 1 OpenMP threads
 
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg| %total
@@ -4302,18 +4341,18 @@ Neigh   | 0          | 0          | 0          |   0.0 |  0.00
 Comm    | 0          | 0          | 0          |   0.0 |  0.00
 Output  | 0          | 0          | 0          |   0.0 |  0.00
 Modify  | 0          | 0          | 0          |   0.0 |  0.00
-Other   |            | 1.865e-06  |            |       |100.00
+Other   |            | 2.451e-06  |            |       |100.00
 
-Nlocal:          467.5 ave         594 max         379 min
+Nlocal:          377.5 ave         490 max         303 min
 Histogram: 1 0 1 1 0 0 0 0 0 1
-Nghost:          358.5 ave         406 max         307 min
+Nghost:          287.5 ave         319 max         251 min
+Histogram: 1 0 0 1 0 0 0 1 0 1
+Neighs:         2400.5 ave        3001 max        1809 min
 Histogram: 1 0 0 0 1 1 0 0 0 1
-Neighs:        2969.25 ave        3798 max        2216 min
-Histogram: 1 0 0 1 0 1 0 0 0 1
 
-Total # of neighbors = 11877
-Ave neighs/atom = 6.3513369
-Ave special neighs/atom = 7.3368984
+Total # of neighbors = 9602
+Ave neighs/atom = 6.3589404
+Ave special neighs/atom = 7.8145695
 Neighbor list builds = 0
 Dangerous builds = 0
 
@@ -4321,13 +4360,13 @@ write_data system.data
 System init for write_data ...
 PPPM initialization ...
   using 12-bit tables for long-range coulomb (src/kspace.cpp:342)
-  G vector (1/distance) = 0.088090019
-  grid = 15 15 15
+  G vector (1/distance) = 0.021201477
+  grid = 3 3 3
   stencil order = 5
-  estimated absolute RMS force accuracy = 0.32218187
-  estimated relative force accuracy = 0.00097024115
+  estimated absolute RMS force accuracy = 0.45134848
+  estimated relative force accuracy = 0.0013592225
   using double precision FFTW3
-  3d grid and FFT values/proc = 3380 960
-Generated 409965 of 409965 mixed pair_coeff terms from geometric mixing rule
+  3d grid and FFT values/proc = 392 12
+Generated 412686 of 412686 mixed pair_coeff terms from geometric mixing rule
 write_dump all atom dump.lammpstrj
 Total wall time: 0:00:00

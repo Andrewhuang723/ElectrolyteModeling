@@ -1,0 +1,53 @@
+boundary p p p
+units real
+atom_style full
+bond_style harmonic
+angle_style harmonic
+dihedral_style opls
+improper_style harmonic
+pair_style lj/cut/coul/long 11.0 11.0
+pair_modify mix geometric
+special_bonds lj/coul 0.0 0.0 0.5
+kspace_style pppm 1e-3
+
+read_data ../minimization/system.data &
+extra/bond/per/atom 3 &
+extra/angle/per/atom 13 &
+extra/dihedral/per/atom 11
+
+
+include ../../PARM_AFTER.lammps
+
+# Create LiPF6 molecules
+molecule lipf6 ../../LiPF6/molecule.txt
+create_atoms 0 random 20 22222 NULL mol & 
+lipf6 55555 overlap 1 maxtry 50
+
+#Create LiFSI molecules
+molecule lifsi ../../LiFSI/molecule.txt
+create_atoms 0 random 20 12345 NULL mol &
+lifsi 13245 overlap 1 maxtry 50
+
+# Create LiDFOB molecules
+molecule lidfob ../../LiDFOB/molecule.txt
+create_atoms 0 random 20 21345 NULL mol &
+lidfob 12354 overlap 1 maxtry 50
+
+minimize 1.0e-4 1.0e-6 1000 100
+
+fix mynpt all npt temp 300 300 100 x 1 1 1000
+timestep 0.1
+
+## Dump traj
+# dump myent all custom 100 dump.entropy c_my_entropy
+dump mydmp all custom 1000 dump.lammpstrj x y z type id
+
+
+## print
+thermo 500
+thermo_style custom step etotal enthalpy evdwl ecoul elong ebond eangle &
+edihed eimp ke pe temp press vol density cpu
+
+
+run 30000
+write_data system.data

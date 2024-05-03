@@ -8,7 +8,7 @@ improper_style harmonic
 pair_style lj/cut/coul/long 11.0 11.0
 pair_modify mix geometric
 special_bonds lj/coul 0.0 0.0 0.5
-kspace_style pppm 0.001
+kspace_style pppm 1e-3
 
 read_data ../system/system.data
 
@@ -16,7 +16,7 @@ include ../../PARM_AFTER.lammps
 
 fix mynve all nve/limit 0.1
 fix myber all temp/berendsen 1 1 100
-timestep 0.5
+timestep 0.1
 
 dump mydmp all atom 1000 dump.lammpstrj
 thermo 200

@@ -17,7 +17,7 @@ compute my_entropy all entropy/atom 0.25 5. avg yes 5.
 
 
 fix mynpt all npt temp 300 300 100 x 1 1 1000
-timestep 1.0
+timestep 0.1
 
 ## Dump traj
 # dump myent all custom 100 dump.entropy c_my_entropy
