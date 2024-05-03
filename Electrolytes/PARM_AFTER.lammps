@@ -904,6 +904,16 @@ mass 903 12.011
 mass 904 12.011
 mass 905 15.999
 mass 906 12.011
+# mass 907 30.970 # LiPF6 P
+# mass 908 19.000 # LiPF6 F
+# mass 909 6.940 # LiPF6 Li
+mass 907 18.9984 # LiFSI F
+# mass 911 6.941 # LiFSI Li
+# mass 912 14.0067 # LiFSI N
+# mass 913 15.9994 # LiFSI O
+# mass 914 32.065 # LiFSI S
+mass 908 10.811 # LiDFOB B
+mass 909 18.9984 # LiDFOB F
 
 pair_coeff 1 1  0.061 2.94
 pair_coeff 2 2  0.118 3.905
@@ -1811,6 +1821,17 @@ pair_coeff 903 903  0.086 3.3
 pair_coeff 904 904  0.086 3.3
 pair_coeff 905 905  0.21 2.96
 pair_coeff 906 906  0.066 3.5
+# pair_coeff 907 907 0.2000000 3.740 # P # JPCB 2004, 2038
+# pair_coeff 908 908 0.0610000 3.118 # F # JPCB 2004, 2038
+# pair_coeff 909 909 0.0005000 2.870 # Li # JCTC 2006
+pair_coeff 907 907 0.222 2.95 # F JBCB 2010 114 3592–3600
+# pair_coeff 911 911 0.0005000 2.870 # Li # JCTC 2006
+# pair_coeff 912 912 0.17 3.25 # N # oplsaa #421 sulfonamide
+# pair_coeff 913 913 0.17 2.96 # O # oplsaa #416 sulfonamide
+# pair_coeff 914 914 0.25 3.55 # S # oplsaa #415 sulfonamide
+pair_coeff 908 908 0.095 3.5814 # B https://pubs.acs.org/doi/10.1021/ct900009a
+pair_coeff 909 909 0.0610000 3.118 # F # JPCB 2004, 2038
+
 bond_coeff 1  367.0 1.38
 bond_coeff 2  420.0 1.357
 bond_coeff 3  367.0 1.36
@@ -2190,6 +2211,17 @@ bond_coeff 376  260.0 1.52
 bond_coeff 377  550.0 1.225
 bond_coeff 378  94.0 2.32
 bond_coeff 379  549.0 1.345
+bond_coeff 380  370.4589 1.606 # LiPF6 P-F JPCB 2004, 16893
+bond_coeff 381  1879.0 1.575 # LiFSI S-F JBCB 2010 114 3592–3600
+bond_coeff 382  434.0 1.67 # LiFSI S-N
+bond_coeff 383  700.0 1.44 # LiFSI S-O
+bond_coeff 384  350.0 1.51 # LiDFOB C-C
+bond_coeff 385  1879.0 1.575 # LiDFOB  F-B
+bond_coeff 386  1879.0 1.575 # LiDFOB O-B
+bond_coeff 387  450.0 1.364 # LiDFOB O-C
+bond_coeff 388  570.0 1.229 # LiDFOB O=C
+
+
 angle_coeff 1  33.0 109.47
 angle_coeff 2  50.0 109.5
 angle_coeff 3  63.0 112.4
@@ -3207,6 +3239,20 @@ angle_coeff 1014  70.0 124.0
 angle_coeff 1015  85.0 117.0
 angle_coeff 1016  160.0 180.0
 angle_coeff 1017  160.0 180.0
+angle_coeff 1018  139.2209 90.00 # JPCB 2004, 16893
+angle_coeff 1019  34.77535 180.00 # JPCB 2004, 16893
+angle_coeff 1020  902.00 103.00 # LiFSI F-S-N JBCB 2010 114 3592–3600
+angle_coeff 1021  1077.00 104.10 # LiFSI F-S-O JBCB 2010 114 3592–3600
+angle_coeff 1022  1 1# LiFSI O-S-N args
+angle_coeff 1023  1 1# LiFSI O-S-O
+angle_coeff 1024  1 1# LiFSI S-N-S
+angle_coeff 1025 1 1 # LiDFOB C-O-B
+angle_coeff 1026 1 1 # LiDFOB F-B-F
+angle_coeff 1027 1 1 # LiDFOB F-B-O
+angle_coeff 1028 1 1 # LiDFOB O-B-O
+angle_coeff 1029 1 1 # LiDFOB O-C-C
+angle_coeff 1030 1 1 # LiDFOB O-C-O 
+
 dihedral_coeff 1  -2.5 1.25 3.1 0.0
 dihedral_coeff 2  -2.5 1.25 3.1 0.0
 dihedral_coeff 3  -2.0 0.7 3.0 0.0
@@ -4007,6 +4053,17 @@ dihedral_coeff 797  0.0 5.0 0.0 0.0
 dihedral_coeff 798  0.0 10.75 0.0 0.0
 dihedral_coeff 799  1.3 -0.05 0.2 0.0
 dihedral_coeff 800  1.3 -0.05 0.2 0.0
+dihedral_coeff 801  11.446 -15.186 -3.212 0.00 # LiFSI S-N-S-F JBCB 2010 114 3592–3600
+dihedral_coeff 802  0 0 -0.015 0.00 # LiFSI S-N-S-O JBCB 2010 114 3592–3600
+dihedral_coeff 803 1 1 1 0.00 # LiDFOB C-C-O-B
+dihedral_coeff 804 1 1 1 0.00 # LiDFOB C-O-C-B
+dihedral_coeff 805 1 1 1 0.00 # LiDFOB F-B-O-C
+dihedral_coeff 806 1 1 1 0.00 # LiDFOB F-O-B-C
+dihedral_coeff 807 1 1 1 0.00 # LiDFOB O-B-O-C
+dihedral_coeff 808 1 1 1 0.00 # LiDFOB O-C-C-B
+dihedral_coeff 809 1 1 1 0.00 # LiDFOB O-C-O-B
+dihedral_coeff 810 1 1 1 0.00 # LiDFOB O-O-B-C
+dihedral_coeff 811 1 1 1 0.00 # LiDFOB O-O-C-B
 # The following force field parameters were converted from
 # the tinker parameter file (oplsaa.prm) and then edited by hand:
 # Thanks to David Huang (adelaide.edu.au) for the corrections:
