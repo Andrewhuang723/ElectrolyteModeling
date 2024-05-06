@@ -1,0 +1,92 @@
+boundary p p p
+units real
+atom_style full
+bond_style harmonic
+angle_style harmonic
+dihedral_style opls
+improper_style harmonic
+pair_style lj/cut/coul/long 11.0 11.0
+pair_modify mix geometric
+special_bonds lj/coul 0.0 0.0 0.5
+kspace_style pppm 1e-3
+
+region box block -100 100 -100 100 -100 100
+create_box 909 box &
+bond/types 388 &
+angle/types 1030 &
+dihedral/types 811 &
+improper/types 6 &
+extra/bond/per/atom 1000 &
+extra/angle/per/atom 2000 &
+extra/dihedral/per/atom 1000 &
+extra/improper/per/atom 1000 &
+extra/special/per/atom 400
+
+
+
+include ../../../PARM_AFTER.lammps
+
+# Create EC molecules
+molecule ecmol ../../../EC/molecule.txt
+create_atoms 0 random 341 12345 NULL mol &
+ecmol 13245 overlap 1 maxtry 50
+
+# Create PC molecules
+molecule pcmol ../../../PC/molecule.txt
+create_atoms 0 random 49 23451 NULL mol &
+pcmol 24351 overlap 1 maxtry 50
+
+# Create EMC molecules
+molecule emcmol ../../../EMC/molecule.txt
+create_atoms 0 random 193 34512 NULL mol &
+emcmol 35412 overlap 1 maxtry 50
+
+# Create DMC molecules
+molecule dmcmol ../../../DMC/molecule.txt
+create_atoms 0 random 167 34512 NULL mol &
+dmcmol 35412 overlap 1 maxtry 50
+
+# Create EA molecules
+molecule eamol ../../../EA/molecule.txt
+create_atoms 0 random 341 45123 NULL mol &
+eamol 41523 overlap 1 maxtry 50
+
+# Create FEC molecules
+molecule fecmol ../../../FEC/molecule.txt
+create_atoms 0 random 10 65432 NULL mol &
+fecmol 64532 overlap 1 maxtry 50
+
+# Create VC molecules
+molecule vcmol ../../../VC/molecule.txt
+create_atoms 0 random 18 76543 NULL mol &
+vcmol 75643 overlap 1 maxtry 50
+
+# Create DTD molecules
+molecule dtdmol ../../../DTD/molecule.txt
+create_atoms 0 random 9 67543 NULL mol &
+dtdmol 65743 overlap 1 maxtry 50
+
+# # Create LiPF6 molecules
+# molecule lipf6 ../../LiPF6/molecule.txt
+# create_atoms 0 random 20 51234 NULL mol &
+# lipf6 52134 overlap 1 maxtry 50
+
+# # Create LiFSI molecules
+# molecule lifsi ../../LiFSI/molecule.txt
+# create_atoms 0 random 20 12345 NULL mol &
+# lifsi 13245 overlap 1 maxtry 50
+
+# # Create LiDFOB molecules
+# molecule lidfob ../../LiDFOB/molecule.txt
+# create_atoms 0 random 20 12345 NULL mol &
+# lidfob 13245 overlap 1 maxtry 50
+
+
+# minimzation
+minimize 1.0e-4 1.0e-6 1000 100
+
+## Run
+run 0
+
+write_data system.data
+write_dump all atom dump.lammpstrj

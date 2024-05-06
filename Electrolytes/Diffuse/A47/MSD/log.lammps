@@ -1,0 +1,174 @@
+LAMMPS (2 Aug 2023)
+OMP_NUM_THREADS environment is not set. Defaulting to 1 thread. (src/comm.cpp:98)
+  using 1 OpenMP thread(s) per MPI task
+boundary p p p
+units real
+atom_style full
+bond_style harmonic
+angle_style harmonic
+dihedral_style opls
+improper_style harmonic
+pair_style lj/cut/coul/long 12
+kspace_style pppm 1e-3
+neigh_modify	delay 0 every 1
+
+read_data ../AddSalts/system.data
+Reading data file ...
+  orthogonal box = (-111.76682 -100 -100) to (111.76682 100 100)
+  2 by 1 by 2 MPI processor grid
+  reading atoms ...
+  13871 atoms
+  reading velocities ...
+  13871 velocities
+  scanning bonds ...
+  6 = max bonds/atom
+  scanning angles ...
+  15 = max angles/atom
+  scanning dihedrals ...
+  15 = max dihedrals/atom
+  scanning impropers ...
+  2 = max impropers/atom
+  reading bonds ...
+  13045 bonds
+  reading angles ...
+  21579 angles
+  reading dihedrals ...
+  19268 dihedrals
+  reading impropers ...
+  2126 impropers
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        0        0       
+  special bond factors coul:  0        0        0       
+     6 = max # of 1-2 neighbors
+     7 = max # of 1-3 neighbors
+    12 = max # of 1-4 neighbors
+    13 = max # of special neighbors
+  special bonds CPU = 0.004 seconds
+  read_data CPU = 0.369 seconds
+
+group Li type 348
+63 atoms in group Li
+group PF6 type 726 727
+238 atoms in group PF6
+group FSI type 907
+50 atoms in group FSI
+group DFOB type 908 909
+12 atoms in group DFOB
+
+variable        t equal 300
+
+fix             1 all nvt temp $t $t 100
+fix             1 all nvt temp 300 $t 100
+fix             1 all nvt temp 300 300 100
+# fix	            2 all langevin $t $t 1 498094
+timestep 0.1
+
+dump mydmp all atom 1000 dump.lammpstrj
+
+# data gathering run
+
+reset_timestep  0
+
+
+# factor of 4 in 2 variables is for 2d
+
+compute         Liion Li msd com yes
+compute         PF6ion PF6 msd com yes
+compute         FSIion FSI msd com yes
+compute         DFOBion DFOB msd com yes
+
+variable        Li_twopoint equal c_Liion[4]/6/(step*dt+1.0e-6)
+variable        PF6_twopoint equal c_PF6ion[4]/6/(step*dt+1.0e-6)
+variable        FSI_twopoint equal c_FSIion[4]/6/(step*dt+1.0e-6)
+variable        DFOB_twopoint equal c_DFOBion[4]/6/(step*dt+1.0e-6)
+
+fix             3 all vector 10 c_Liion[4]
+fix             4 all vector 10 c_PF6ion[4]
+fix             5 all vector 10 c_FSIion[4]
+fix             6 all vector 10 c_DFOBion[4]
+
+variable        Li_ion_fitslope equal slope(f_3)/6/(10*dt)
+variable        PF6_ion_fitslope equal slope(f_4)/6/(10*dt)
+variable        FSI_ion_fitslope equal slope(f_5)/6/(10*dt)
+variable        DFOB_ion_fitslope equal slope(f_6)/6/(10*dt)
+
+
+thermo_style    custom step temp v_Li_ion_fitslope v_PF6_ion_fitslope v_FSI_ion_fitslope v_DFOB_ion_fitslope
+
+thermo          1000
+run	            200000
+PPPM initialization ...
+WARNING: System is not charge neutral, net charge = -115.63 (src/kspace.cpp:327)
+  using 12-bit tables for long-range coulomb (src/kspace.cpp:342)
+  G vector (1/distance) = 0.087110538
+  grid = 18 15 15
+  stencil order = 5
+  estimated absolute RMS force accuracy = 0.34041432
+  estimated relative force accuracy = 0.0010251476
+  using double precision FFTW3
+  3d grid and FFT values/proc = 3640 1080
+Generated 412686 of 412686 mixed pair_coeff terms from geometric mixing rule
+Neighbor list info ...
+  update: every = 1 steps, delay = 0 steps, check = yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 14
+  ghost atom cutoff = 14
+  binsize = 7, bins = 32 29 29
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut/coul/long, perpetual
+      attributes: half, newton on
+      pair build: half/bin/newton
+      stencil: half/bin/3d
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 19.3 | 19.31 | 19.32 Mbytes
+   Step          Temp      v_Li_ion_fitslope v_PF6_ion_fitslope v_FSI_ion_fitslope v_DFOB_ion_fitslope
+         0   304.24968      1.6666667e+19  1.6666667e+19  1.6666667e+19  1.6666667e+19
+      1000   305.0449       0.0014441559   0.00097769686  0.0023855193   0.0036659115 
+      2000   305.32089      0.0020504741   0.0018111732   0.0046141805   0.0058798073 
+      3000   301.32781      0.0030620051   0.0025074095   0.006758643    0.0077721572 
+      4000   298.67785      0.0042398195   0.0031074041   0.0083201279   0.0094040835 
+      5000   298.60957      0.0048693253   0.0036518549   0.0096808578   0.010928414  
+      6000   302.35374      0.005359258    0.0041688864   0.011010328    0.011514252  
+      7000   300.74042      0.005839571    0.0046783995   0.012092525    0.012025102  
+      8000   296.63049      0.0061967264   0.0051906274   0.013232078    0.012677776  
+      9000   298.99826      0.006462313    0.0057050245   0.014165761    0.01347986   
+     10000   297.64056      0.0067719966   0.0062229164   0.014954559    0.013845539  
+     11000   302.09909      0.0071579119   0.0067619301   0.015718487    0.014199344  
+     12000   295.95941      0.0075546282   0.0073236542   0.016532764    0.014340139  
+     13000   300.18046      0.0079713068   0.007887192    0.017312802    0.014416121  
+     14000   299.09683      0.0085069882   0.0084589936   0.017963693    0.014905684  
+     15000   300.13629      0.0090386933   0.0090455827   0.01862322     0.015592619  
+     16000   303.09693      0.0096112356   0.0096340799   0.019286148    0.016224421  
+     17000   296.4196       0.010194658    0.010218226    0.019997782    0.016812221  
+     18000   297.86153      0.01079572     0.010800886    0.020616392    0.017324071  
+     19000   300.74447      0.011393626    0.011384528    0.021243316    0.017982463  
+     20000   306.62884      0.011893946    0.011973732    0.021870956    0.018665032  
+     21000   303.18409      0.012360892    0.012574084    0.022468696    0.019532465  
+     22000   300.39601      0.012832592    0.013187143    0.023077982    0.02051192   
+     23000   300.87705      0.01327874     0.013812997    0.023662492    0.021585798  
+     24000   299.80357      0.013769628    0.014451255    0.024190945    0.0228486    
+     25000   302.13938      0.014268304    0.015098167    0.024615638    0.024066136  
+     26000   301.04024      0.01474479     0.015751175    0.024986707    0.025341311  
+     27000   303.81468      0.015242638    0.016410653    0.025331368    0.026556432  
+     28000   300.4228       0.01576599     0.017076095    0.025686458    0.027747464  
+     29000   296.8234       0.016330391    0.017751165    0.026054993    0.028812538  
+     30000   299.57991      0.01687167     0.018435959    0.026381846    0.02962046   
+     31000   300.04337      0.017335689    0.019127645    0.026660742    0.03034473   
+     32000   303.5571       0.017755585    0.019826237    0.026939287    0.031057499  
+     33000   302.15057      0.0181481      0.020530392    0.02727077     0.03175748   
+     34000   297.56006      0.018507755    0.021236181    0.027643706    0.032565152  
+     35000   297.28397      0.018828506    0.021941582    0.028021773    0.033471725  
+     36000   300.2196       0.019157171    0.022647083    0.028403127    0.034492722  
+     37000   304.77129      0.019485927    0.023352302    0.028802025    0.03548856   
+     38000   301.1079       0.01983051     0.024056027    0.029206119    0.036287016  
+     39000   298.04032      0.020166782    0.024755216    0.029584536    0.036878886  
+     40000   296.55129      0.020498614    0.025446588    0.029911754    0.037319857  
+     41000   301.41243      0.02082747     0.026131558    0.030206437    0.037701137  
+     42000   306.8598       0.021159436    0.026813642    0.030501366    0.038128323  
+     43000   305.29818      0.021487457    0.027491266    0.030802801    0.038572014  
+     44000   305.12341      0.021818018    0.028159657    0.031097604    0.039059198  
+     45000   297.17726      0.022145414    0.028816632    0.031386862    0.03966165   
+     46000   299.8926       0.022461463    0.029461688    0.031690185    0.040279734  
+     47000   299.77708      0.022766152    0.030095847    0.031993281    0.040799467  
+     48000   300.77989      0.023059935    0.03072033     0.03229314     0.041184299  
+     49000   297.07913      0.023354863    0.031336349    0.0

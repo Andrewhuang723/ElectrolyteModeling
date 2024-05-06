@@ -1,0 +1,50 @@
+boundary p p p
+units real
+atom_style full
+bond_style harmonic
+angle_style harmonic
+dihedral_style opls
+improper_style harmonic
+pair_style lj/cut/coul/long 12
+kspace_style pppm 1e-3
+neigh_modify	delay 0 every 1
+
+read_data ../AddSalts/system.data
+
+group Li type 348
+group PF6 type 726 727
+group FSI type 907
+
+variable        t equal 300
+
+fix             1 all nve
+fix	            2 all langevin $t $t 1 498094
+
+dump mydmp all atom 1000 dump.lammpstrj
+
+# data gathering run
+
+reset_timestep  0
+
+# factor of 4 in 2 variables is for 2d
+
+compute         Liion Li msd com yes
+compute         PF6ion PF6 msd com yes
+compute         FSIion FSI msd com yes
+
+variable        Li_twopoint equal c_Liion[4]/4/(step*dt+1.0e-6)
+variable        PF6_twopoint equal c_PF6ion[4]/4/(step*dt+1.0e-6)
+variable        FSI_twopoint equal c_FSIion[4]/4/(step*dt+1.0e-6)
+
+fix             3 all vector 10 c_Liion[4]
+fix             4 all vector 10 c_PF6ion[4]
+fix             5 all vector 10 c_FSIion[4]
+
+variable        Li_ion_fitslope equal slope(f_3)/4/(10*dt)
+variable        PF6_ion_fitslope equal slope(f_4)/4/(10*dt)
+variable        FSI_ion_fitslope equal slope(f_5)/4/(10*dt)
+
+thermo_style    custom step temp v_Li_ion_fitslope v_PF6_ion_fitslope v_FSI_ion_fitslope
+
+thermo          1000
+run	            200000
